@@ -1,26 +1,371 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* ── Perception Color System ───────────────────────────── */
+  /* Paper / neutral extension wands */
+  --color-paper: #fbf7ee;
+  --color-paper-2: #f4eddf;
+  --color-paper-3: #e9e0cd;
+  --color-paper-deep: #ddd2b8;
+  --color-ink: #1f1c16;
+  --color-ink-soft: #5f5848;
+  --color-ink-faint: #8a8271;
+  --color-line: #1f1c1622;
+
+  /* Core service colors — per Website UI Spec v1.0 */
+  --color-frame: #f2d64e; /* Frame Yellow */
+  --color-frame-deep: #c9a71e;
+  --color-tape: #6f8dbf; /* Tape Blue */
+  --color-tape-deep: #5a729b;
+  --color-signal: #e25c4f; /* Signal Red */
+  --color-signal-deep: #bb4a3e;
+  --color-moss: #6c7a5e; /* Moss */
+  --color-moss-deep: #59644d;
+
+  /* Sparing editorial accents */
+  --color-terracotta: #b9613e;
+  --color-plum: #5b3a5c;
+  --color-bone: #e8e0cf;
+
+  /* ── Type system ────────────────────────────────────────── */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-hand: var(--font-caveat), cursive;
+  --font-mono: var(--font-space-mono), ui-monospace, "SFMono-Regular", monospace;
+
+  /* ── Motion ─────────────────────────────────────────────── */
+  --animate-marquee: marquee 44s linear infinite;
+  --animate-marquee-slow: marquee 70s linear infinite;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-tape: tape-in 0.6s ease-out both;
+  --animate-reveal-up: reveal-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-stamp: stamp 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  --animate-pulse-dot: pulse-dot 2.2s ease-in-out infinite;
+  --animate-reel: reel 0.9s steps(2, end) infinite;
+  --animate-progress: progress 4s linear forwards;
+  --animate-fade-swap: fade-swap 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-casefile-cover: casefile-cover 0.62s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-casefile-reveal: casefile-reveal 0.5s cubic-bezier(0.45, 0, 1, 1) both;
+  --animate-casefile-veil: casefile-veil 0.3s ease-out both;
+  --animate-casefile-label-in: casefile-label-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-sheet-in: sheet-in 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-sheet-pop: sheet-pop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  --animate-sheet-rise: sheet-rise 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+
+  --shadow-stack: 0 1px 2px #1f1c1614, 0 8px 24px -12px #1f1c1633;
+  --shadow-paper: 0 2px 4px #1f1c1610, 0 18px 40px -20px #1f1c1626;
+  --shadow-window: 0 10px 30px -12px #1f1c1633, 0 2px 6px #1f1c1614;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
   }
 }
 
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(var(--float-rot, 0deg));
+  }
+  50% {
+    transform: translateY(-8px) rotate(var(--float-rot, 0deg));
+  }
+}
+
+@keyframes tape-in {
+  from {
+    transform: rotate(var(--tape-rot, -3deg)) translateY(-40%) scaleX(0.6);
+    opacity: 0;
+  }
+  to {
+    transform: rotate(var(--tape-rot, -3deg)) translateY(0) scaleX(1);
+    opacity: 0.86;
+  }
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes stamp {
+  from {
+    transform: scale(2.2) rotate(-14deg);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) rotate(-8deg);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 0 0 #e25c4f66;
+  }
+  50% {
+    opacity: 0.7;
+    box-shadow: 0 0 0 6px #e25c4f00;
+  }
+}
+
+@keyframes reel {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@keyframes progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes fade-swap {
+  from {
+    opacity: 0;
+    transform: translateY(6px) rotate(0.4deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+@keyframes casefile-cover {
+  from {
+    transform: translate(var(--fx, 0px), var(--fy, 0px))
+      scale(var(--fsx, 1), var(--fsy, 1));
+  }
+  to {
+    transform: translate(0, 0) scale(1, 1);
+  }
+}
+
+@keyframes casefile-reveal {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-8vh) scale(1.02);
+  }
+}
+
+@keyframes casefile-veil {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes casefile-label-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes sheet-in {
+  from {
+    opacity: 0;
+    transform: translateY(-14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes sheet-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.8) rotate(-3deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes sheet-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes cue-drop {
+  0% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+  25% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-frame);
+  color: var(--color-ink);
+}
+
+/* ── Paper texture (subtle fiber + tooth) ────────────────── */
+@utility texture-paper {
+  background-color: var(--color-paper);
+  background-image:
+    radial-gradient(#1f1c1608 1px, transparent 1px),
+    radial-gradient(#1f1c1606 1px, transparent 1px),
+    linear-gradient(160deg, #ffffff38 0%, transparent 30%, #1f1c1606 100%);
+  background-size: 3px 3px, 7px 7px, 100% 100%;
+  background-position: 0 0, 2px 3px, 0 0;
+}
+
+@utility texture-paper-2 {
+  background-color: var(--color-paper-2);
+  background-image:
+    radial-gradient(#1f1c1608 1px, transparent 1px),
+    linear-gradient(200deg, #ffffff30 0%, transparent 40%, #1f1c1608 100%);
+  background-size: 4px 4px, 100% 100%;
+}
+
+/* ── Grid / puzzle motif ─────────────────────────────────── */
+@utility grid-lines {
+  background-image:
+    linear-gradient(var(--color-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-line) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+@utility grid-lines-sm {
+  background-image:
+    linear-gradient(var(--color-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-line) 1px, transparent 1px);
+  background-size: 14px 14px;
+}
+
+/* ── Washi tape ──────────────────────────────────────────── */
+@utility tape {
+  position: relative;
+  display: inline-block;
+  background: linear-gradient(180deg, var(--tape-color, var(--color-tape)) 0%, color-mix(in srgb, var(--tape-color, var(--color-tape)) 82%, white) 100%);
+  opacity: 0.86;
+  box-shadow: 0 1px 2px #1f1c1622;
+  transform: rotate(var(--tape-rot, -3deg));
+  clip-path: polygon(2% 0%, 98% 4%, 100% 92%, 0% 100%);
+}
+
+/* ── Typewriter/paper rules ──────────────────────────────── */
+@utility mono-label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+@utility hand {
+  font-family: var(--font-hand);
+  letter-spacing: 0.01em;
+}
+
+@utility hairline {
+  border-top: 1px solid var(--color-line);
+}
+
+/* ── Case file ───────────────────────────────────────────── */
+@utility case-sheet {
+  background: linear-gradient(180deg, #fffdf7 0%, var(--color-paper) 100%);
+  border: 1px solid var(--color-line);
+  box-shadow: var(--shadow-paper);
+  position: relative;
+}
+
+/* Punched holes on case sheets */
+@utility case-holes {
+  position: relative;
+}
+.case-holes::before,
+.case-holes::after {
+  content: "";
+  position: absolute;
+  left: -14px;
+  width: 10px;
+  height: 10px;
+  border-radius: 9999px;
+  background: var(--color-paper-deep);
+  border: 1px solid var(--color-line);
+  box-shadow: inset 0 1px 2px #1f1c1614;
+}
+.case-holes::before {
+  top: 22px;
+}
+.case-holes::after {
+  top: 46px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
 }
