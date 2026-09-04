@@ -1,6 +1,6 @@
 "use client";
 
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import { Draggable, type DragRef } from "./Draggable";
 
 export function SystemConsole({
@@ -12,6 +12,7 @@ export function SystemConsole({
   defaultY = 0,
   rotation = 0,
   className,
+  style,
 }: {
   title: string;
   tag?: string;
@@ -21,6 +22,7 @@ export function SystemConsole({
   defaultY?: number;
   rotation?: number;
   className?: string;
+  style?: React.CSSProperties;
 }) {
   return (
     <Draggable
@@ -30,6 +32,7 @@ export function SystemConsole({
       rotate={rotation}
       handle
       className={className}
+      style={style}
     >
       {({ onPointerDown }) => (
         <div className="w-64 border border-ink/25 bg-paper/95 shadow-window backdrop-blur-[1px]">

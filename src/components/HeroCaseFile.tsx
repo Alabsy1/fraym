@@ -163,7 +163,7 @@ export function HeroCaseFile({
         className="relative h-full cursor-pointer select-none transition-transform duration-200 hover:-rotate-[0.3deg] hover:scale-[1.005]"
         onClick={handleCardClick}
       >
-        {/* ── Full manila folder background ── */}
+        {/* ── Layer 1: Full manila folder background ── */}
         <motion.img
           src="/layer1.png"
           alt=""
@@ -173,17 +173,15 @@ export function HeroCaseFile({
 
         {/* ── Content rendered directly on the folder ── */}
         <motion.div
-          className="absolute inset-0 flex flex-col p-[8%] pr-[18%]"
+          className="absolute inset-0 flex flex-col p-[7%] pr-[16%]"
           variants={reduced ? undefined : fadeIn}
         >
           {/* Header */}
-          <div className="flex items-start justify-between border-b-2 border-ink/60 pb-3">
-            <div>
-              <p className="mono-label text-ink-faint">CASE FILE</p>
-              <p className="font-mono text-xl font-bold tracking-tight text-ink sm:text-2xl">
-                {tab.ref}
-              </p>
-            </div>
+          <div className="border-b-2 border-ink/60 pb-3">
+            <p className="mono-label text-ink-faint">CASE FILE</p>
+            <p className="font-mono text-xl font-bold tracking-tight text-ink sm:text-2xl">
+              {tab.ref}
+            </p>
           </div>
 
           {/* Metadata fields */}

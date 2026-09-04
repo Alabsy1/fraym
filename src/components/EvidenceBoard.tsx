@@ -3,12 +3,26 @@
 import { useRef } from "react";
 import { MotionConfig } from "framer-motion";
 import { SectionTitle } from "@/components/ui/SectionTitle";
-import { StickyNote } from "@/components/ui/StickyNote";
 import { Draggable } from "@/components/ui/Draggable";
 import { Polaroid } from "@/components/ui/Polaroid";
-import { SystemConsole } from "@/components/ui/SystemConsole";
 import { SignalReveal } from "@/components/ui/SignalReveal";
 import { CircleHighlight } from "@/components/ui/FramedHighlight";
+
+const boardImages: {
+  src: string;
+  caption: string;
+  top: string;
+  left: string;
+  rotate: number;
+  rotation: number;
+}[] = [
+  { src: "/board-1.png", caption: "coastal light study — raw capture.", top: "8%", left: "6%", rotate: -6, rotation: -6 },
+  { src: "/board-2.png", caption: "frame decision — the room before reading.", top: "12%", left: "42%", rotate: 4, rotation: 4 },
+  { src: "/board-3.png", caption: "exposure map — motion vectors detected.", top: "58%", left: "10%", rotate: 3, rotation: 3 },
+  { src: "/board-4.png", caption: "deliberate light — after the frame.", top: "65%", left: "65%", rotate: -4, rotation: -4 },
+  { src: "/board-5.png", caption: "scene context — pinned evidence.", top: "22%", left: "70%", rotate: 5, rotation: 5 },
+  { src: "/board-6.png", caption: "planning board — coastal shoot layout.", top: "42%", left: "25%", rotate: -2, rotation: -2 },
+];
 
 export function EvidenceBoard() {
   const boardRef = useRef<HTMLDivElement | null>(null);
@@ -41,7 +55,7 @@ export function EvidenceBoard() {
 
         <div
           ref={boardRef}
-          className="texture-paper-2 relative mt-12 min-h-[600px] overflow-hidden border-2 border-ink/15 shadow-window sm:min-h-[640px] lg:min-h-[660px]"
+          className="texture-paper-2 relative mt-12 h-[660px] overflow-hidden border-2 border-ink/15 shadow-window"
         >
           <div
             className="grid-lines-sm pointer-events-none absolute inset-0 opacity-20"
@@ -50,69 +64,25 @@ export function EvidenceBoard() {
           <Threads />
 
           <MotionConfig reducedMotion="user">
-            <Draggable
-              constraints={boardRef}
-              rotate={-2}
-              className="absolute left-[4%] top-[8%] cursor-grab active:cursor-grabbing"
-            >
-              <Polaroid rotation={0} pin caption="the room, unread — every pixel a rumor.">
-                <ScoutSketch />
-              </Polaroid>
-            </Draggable>
-
-            <Draggable
-              constraints={boardRef}
-              rotate={2}
-              className="absolute right-[4%] top-[6%] cursor-grab active:cursor-grabbing"
-            >
-              <StickyNote tone="frame" rotation={0} className="w-56">
-                <p className="mono-label text-[0.55rem] font-bold text-ink-soft">
-                  OBSERVATION Nº 01
-                </p>
-                <p className="hand mt-1.5 text-xl leading-snug text-ink">
-                  the frame is a decision. most brands never make it.
-                </p>
-              </StickyNote>
-            </Draggable>
-
-            <SystemConsole
-              constraints={boardRef}
-              rotation={-1}
-              className="absolute left-[30%] top-[38%] cursor-grab"
-              title="PERCEPTION READOUT"
-              tag="CONSOLE /01"
-              lines={[
-                { label: "on-brand noise", value: "61%" },
-                { label: "off-brand noise", value: "39%" },
-                { label: "perceived intent", value: "weak" },
-                { label: "recommended system", value: "FRAME" },
-              ]}
-            />
-
-            <Draggable
-              constraints={boardRef}
-              rotate={1}
-              className="absolute left-[6%] top-[56%] cursor-grab active:cursor-grabbing"
-            >
-              <Polaroid rotation={0} pin caption="after the frame — deliberate light.">
-                <FramedWall />
-              </Polaroid>
-            </Draggable>
-
-            <Draggable
-              constraints={boardRef}
-              rotate={-2}
-              className="absolute bottom-[6%] right-[5%] cursor-grab active:cursor-grabbing"
-            >
-              <StickyNote tone="signal" rotation={0} className="w-56">
-                <p className="mono-label text-[0.55rem] font-bold text-signal-deep">
-                  SIGNAL FOUND
-                </p>
-                <p className="hand mt-1.5 text-xl leading-snug text-ink">
-                  the brief contradicts the brand. flag it, frame it, fix it.
-                </p>
-              </StickyNote>
-            </Draggable>
+            {boardImages.map((img) => (
+              <Draggable
+                key={img.src}
+                constraints={boardRef}
+                rotate={img.rotate}
+                dragElastic={0.1}
+                className="z-10 cursor-grab active:cursor-grabbing"
+                style={{ position: "absolute", top: img.top, left: img.left }}
+                whileHover={{ scale: 1.08, rotate: 0, zIndex: 50, boxShadow: "0 25px 50px -12px rgb(0 0 0 / 0.25)" }}
+              >
+                <Polaroid rotation={img.rotation} pin caption={img.caption}>
+                  <img
+                    src={img.src}
+                    alt=""
+                    className="h-full w-full object-cover"
+                  />
+                </Polaroid>
+              </Draggable>
+            ))}
           </MotionConfig>
         </div>
       </div>
@@ -144,56 +114,6 @@ function Threads() {
         <circle cx="300" cy="460" r="3.5" />
         <circle cx="580" cy="500" r="3.5" />
       </g>
-    </svg>
-  );
-}
-
-/* ── polaroid art: the room before reading ─────────────────── */
-function ScoutSketch() {
-  return (
-    <svg
-      className="absolute inset-0 h-full w-full"
-      viewBox="0 0 200 150"
-      preserveAspectRatio="none"
-      aria-hidden
-    >
-      <rect width="200" height="150" fill="#e9e3d1" />
-      <path d="M0 112 L 200 66" stroke="#7a7364" strokeWidth="1.4" strokeDasharray="6 4" />
-      <path d="M36 96 C 78 58, 130 88, 178 46" stroke="#7a7364" strokeWidth="1.2" fill="none" strokeDasharray="3 3" />
-      <rect x="96" y="78" width="22" height="18" fill="none" stroke="#7a7364" strokeWidth="1" strokeDasharray="4 3" />
-      <path d="M30 34 l 3 7 l 7 3 l -7 3 l -3 7 l -3 -7 l -7 -3 l 7 -3 Z" stroke="#7a7364" strokeWidth="0.9" fill="none" />
-      <path d="M158 110 h 30 M168 104 v 12" stroke="#7a7364" strokeWidth="1" />
-      <circle cx="152" cy="40" r="3" fill="none" stroke="#7a7364" strokeWidth="1" />
-      <path d="M120 128 Q 140 118 160 126" stroke="#7a7364" strokeWidth="1" fill="none" />
-    </svg>
-  );
-}
-
-/* ── polaroid art: the same room, lit & framed ─────────────── */
-function FramedWall() {
-  return (
-    <svg
-      className="absolute inset-0 h-full w-full"
-      viewBox="0 0 200 150"
-      preserveAspectRatio="none"
-      aria-hidden
-    >
-      <defs>
-        <linearGradient id="fraym-board-cone" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#ffe9bd" stopOpacity="0.9" />
-          <stop offset="100%" stopColor="#ffe9bd" stopOpacity="0" />
-        </linearGradient>
-      </defs>
-      <rect width="200" height="150" fill="#4d3622" />
-      <polygon points="86,4 66,120 108,120" fill="url(#fraym-board-cone)" opacity="0.4" />
-      <polygon points="122,4 102,120 144,120" fill="url(#fraym-board-cone)" opacity="0.3" />
-      <rect x="70" y="30" width="60" height="48" fill="#8a5a2b" />
-      <rect x="75" y="35" width="50" height="38" fill="#d3ab68" />
-      <rect x="79" y="39" width="42" height="30" fill="#eccb93" />
-      <path d="M79 66 Q 92 52 100 60 T 121 48 V 69 H 79 Z" fill="#7a4a2e" opacity="0.92" />
-      <circle cx="94" cy="50" r="3.5" fill="#f2d64e" />
-      <rect x="50" y="118" width="100" height="14" fill="#372512" />
-      <path d="M60 106 h 20 v 12 h -20 Z" fill="#3a2510" />
     </svg>
   );
 }

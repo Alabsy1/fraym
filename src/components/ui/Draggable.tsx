@@ -1,7 +1,8 @@
 "use client";
 
 import { motion, useDragControls } from "framer-motion";
-import type { ReactNode, RefObject } from "react";
+import type { CSSProperties, ReactNode, RefObject } from "react";
+import type { MotionProps } from "framer-motion";
 import { cn } from "@/lib/cn";
 
 export type DragRef = RefObject<HTMLElement | null>;
@@ -18,6 +19,9 @@ export function Draggable({
   defaultY = 0,
   rotate = 0,
   handle = false,
+  dragElastic = 0.16,
+  style,
+  whileHover,
   onDragEnd,
 }: {
   children: ReactNode | ((ctx: DragHandleContext) => ReactNode);
@@ -27,6 +31,10 @@ export function Draggable({
   defaultY?: number;
   rotate?: number;
   handle?: boolean;
+  dragElastic?: number;
+  style?: CSSProperties;
+  whileHover?: MotionProps["whileHover"];
+  hoverTransition?: MotionProps["transition"];
   onDragEnd?: () => void;
 }) {
   const controls = useDragControls();
@@ -42,13 +50,15 @@ export function Draggable({
       dragListener={!handle}
       dragControls={handle ? controls : undefined}
       dragConstraints={constraints as RefObject<Element | null> | undefined}
-      dragElastic={0.16}
+      dragElastic={dragElastic}
       dragMomentum={false}
       whileDrag={{ rotate: rotate * 1.6, scale: 1.05, zIndex: 70 }}
+      whileHover={whileHover}
       initial={{ x: defaultX, y: defaultY, rotate }}
       animate={{ x: defaultX, y: defaultY, rotate }}
       transition={{ type: "spring", stiffness: 320, damping: 26 }}
       className={cn("relative touch-none select-none", className)}
+      style={style}
       onDragEnd={onDragEnd}
     >
       {content}
