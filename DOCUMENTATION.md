@@ -31,7 +31,7 @@
 - **Name:** Fraym Studio (FRAYM — A Perception Studio)
 - **Tagline:** "The method is physical before it is digital."
 - **Domain:** `https://fraym.studio`
-- **Contact:** `hello@fraym.studio` / `careers@fraym.studio` / `+45 20 41 90 00` (Copenhagen)
+- **Contact:** `thisisfraym@gmail.com` / `+20 103 294 4616` (Hurghada & El Gouna, Egypt)
 
 ### Core Concept
 

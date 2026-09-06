@@ -100,7 +100,7 @@ function RawRoom() {
   return (
     <div className="absolute inset-0 overflow-hidden">
       <img
-        src="/left.png"
+        src="/left-new.png"
         alt="Before framing"
         className="h-full w-full object-cover"
       />

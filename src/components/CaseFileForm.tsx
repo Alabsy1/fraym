@@ -36,6 +36,55 @@ export function CaseFileForm({ compact = false }: { compact?: boolean }) {
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+
+    const name = String(formData.get("name") || "").trim();
+    const email = String(formData.get("email") || "").trim();
+    const phone = String(formData.get("phone") || "").trim();
+    const company = String(formData.get("company") || "").trim();
+    const industry = String(formData.get("industry") || "");
+    const system = String(formData.get("service") || "");
+    const brief = String(formData.get("brief") || "").trim();
+
+    const selectedLabels = [...selectedServices]
+      .map((id) => SERVICE_TOGGLES.find((s) => s.id === id)?.label)
+      .filter(Boolean);
+
+    const systemLabel =
+      services.find((s) => s.slug === system)?.system ||
+      (system === "not-sure" ? "Not sure yet" : "Not specified");
+
+    const message = [
+      "New Case File Inquiry - Fraym Studio:",
+      "",
+      `• Name: ${name}`,
+      `• Email: ${email}`,
+      `• Phone: ${phone || "Not specified"}`,
+      `• Company: ${company || "Not specified"}`,
+      `• Industry: ${industry || "Not specified"}`,
+      `• Target System: ${systemLabel}`,
+      `• Services Selected: ${selectedLabels.length ? selectedLabels.join(", ") : "None"}`,
+      `• Case Details: ${brief}`,
+    ].join("\n");
+
+    const whatsappUrl = `https://wa.me/201032944616?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+
+    fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name,
+        email,
+        phone,
+        company,
+        industry,
+        system: systemLabel,
+        services: selectedLabels,
+        brief,
+      }),
+    }).catch(() => {});
+
     setSent(true);
   }
 
@@ -106,6 +155,18 @@ export function CaseFileForm({ compact = false }: { compact?: boolean }) {
             </label>
           </div>
 
+          <label className="block">
+            <span className="mono-label mb-1.5 block text-ink-soft">
+              Phone number
+            </span>
+            <input
+              type="tel"
+              name="phone"
+              placeholder="+1 (555) 123-4567"
+              className={inputClass}
+            />
+          </label>
+
           <div className={`grid gap-5 ${compact ? "sm:grid-cols-1" : "sm:grid-cols-2"}`}>
             <label className="block">
               <span className="mono-label mb-1.5 block text-ink-soft">
@@ -135,6 +196,25 @@ export function CaseFileForm({ compact = false }: { compact?: boolean }) {
               </select>
             </label>
           </div>
+
+          <label className="block">
+            <span className="mono-label mb-1.5 block text-ink-soft">
+              Industry / sector
+            </span>
+            <select name="industry" className={inputClass} defaultValue="">
+              <option value="" disabled>
+                Choose industry...
+              </option>
+              <option value="tech-software">Tech &amp; Software</option>
+              <option value="finance-fintech">Finance &amp; Fintech</option>
+              <option value="hospitality-tourism">Hospitality &amp; Tourism</option>
+              <option value="ecommerce-retail">E-commerce &amp; Retail</option>
+              <option value="real-estate-construction">Real Estate &amp; Construction</option>
+              <option value="healthcare-wellness">Healthcare &amp; Wellness</option>
+              <option value="media-creative">Media &amp; Creative</option>
+              <option value="other">Other</option>
+            </select>
+          </label>
 
           {/* ── Service Toggle Matrix ── */}
           <fieldset className="border border-ink/10 bg-paper-2 p-4">

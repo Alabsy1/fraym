@@ -16,12 +16,11 @@ const boardImages: {
   rotate: number;
   rotation: number;
 }[] = [
-  { src: "/board-1.png", caption: "coastal light study — raw capture.", top: "8%", left: "6%", rotate: -6, rotation: -6 },
-  { src: "/board-2.png", caption: "frame decision — the room before reading.", top: "12%", left: "42%", rotate: 4, rotation: 4 },
-  { src: "/board-3.png", caption: "exposure map — motion vectors detected.", top: "58%", left: "10%", rotate: 3, rotation: 3 },
-  { src: "/board-4.png", caption: "deliberate light — after the frame.", top: "65%", left: "65%", rotate: -4, rotation: -4 },
-  { src: "/board-5.png", caption: "scene context — pinned evidence.", top: "22%", left: "70%", rotate: 5, rotation: 5 },
-  { src: "/board-6.png", caption: "planning board — coastal shoot layout.", top: "42%", left: "25%", rotate: -2, rotation: -2 },
+  { src: "/pin-1.png", caption: "raw evidence — unframed capture.", top: "8%", left: "6%", rotate: -6, rotation: -6 },
+  { src: "/pin-2.png", caption: "deliberate light — after the frame.", top: "58%", left: "8%", rotate: 3, rotation: 3 },
+  { src: "/pin-3.png", caption: "scene context — pinned evidence.", top: "62%", left: "62%", rotate: -4, rotation: -4 },
+  { src: "/pin-4.png", caption: "planning board — coastal shoot layout.", top: "42%", left: "25%", rotate: 5, rotation: 5 },
+  { src: "/pin-5.png", caption: "exposure map — motion vectors detected.", top: "18%", left: "72%", rotate: -2, rotation: -2 },
 ];
 
 export function EvidenceBoard() {

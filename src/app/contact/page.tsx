@@ -64,7 +64,7 @@ export default function ContactPage() {
               },
               {
                 title: "Visit the room",
-                body: "The studio is above Aaboulevard 28, Copenhagen N.",
+                body: "Our studio is based in Hurghada & El Gouna, on the Red Sea coast of Egypt.",
                 value: contact.address.join(", "),
                 href: "https://maps.google.com",
                 cta: "See the map",

@@ -512,10 +512,10 @@ export const journalPosts = [
 ];
 
 export const contact = {
-  email: "hello@fraym.studio",
-  careers: "careers@fraym.studio",
-  phone: "+45 20 41 90 00",
-  address: ["Aaboulevard 28", "2200 Copenhagen N", "Denmark"],
+  email: "thisisfraym@gmail.com",
+  careers: "thisisfraym@gmail.com",
+  phone: "+20 103 294 4616",
+  address: ["Hurghada & El Gouna", "Red Sea, Egypt"],
   socials: [
     { label: "Instagram", href: "https://instagram.com" },
     { label: "Vimeo", href: "https://vimeo.com" },
