@@ -154,13 +154,13 @@ export function HeroCaseFile({
 
   return (
     <motion.div
-      className="relative w-full lg:h-full"
+      className="relative w-full"
       variants={reduced ? undefined : stagger}
       initial="hidden"
       animate="show"
     >
       <div
-        className="relative h-full cursor-pointer select-none transition-transform duration-200 hover:-rotate-[0.3deg] hover:scale-[1.005]"
+        className="relative flex cursor-pointer select-none overflow-hidden rounded-[4px] border border-ink/[0.08] shadow-window transition-transform duration-200 hover:-rotate-[0.3deg] hover:scale-[1.005]"
         onClick={handleCardClick}
       >
         {/* ── Layer 1: Full manila folder background ── */}
@@ -173,7 +173,7 @@ export function HeroCaseFile({
 
         {/* ── Content rendered directly on the folder ── */}
         <motion.div
-          className="absolute inset-0 flex flex-col p-[7%] pr-[16%]"
+          className="relative z-10 flex flex-1 flex-col p-5 sm:p-6"
           variants={reduced ? undefined : fadeIn}
         >
           {/* Header */}
@@ -205,7 +205,7 @@ export function HeroCaseFile({
           role="tablist"
           aria-orientation="vertical"
           aria-label="Case file systems"
-          className="absolute right-0 top-[6%] z-30 flex flex-col"
+          className="relative z-20 flex shrink-0 flex-col self-stretch py-4 sm:py-5"
           variants={reduced ? undefined : slideRight}
         >
           {folderTabs.map((folderTab) => {
@@ -228,7 +228,7 @@ export function HeroCaseFile({
                 }
                 onClick={(e) => handleTabClick(folderTab, e)}
                 className={cn(
-                  "mono-label cursor-pointer select-none px-1.5 py-2 text-[0.45rem] font-bold shadow-stack [writing-mode:vertical-rl] transition-all duration-200 sm:px-2 sm:py-2.5 sm:text-[0.55rem]",
+                  "mono-label cursor-pointer select-none px-1.5 py-2 text-[0.45rem] font-bold [writing-mode:vertical-rl] transition-all duration-200 sm:px-2 sm:py-2.5 sm:text-[0.55rem]",
                   isActive
                     ? "shadow-window scale-105"
                     : "opacity-85 hover:scale-105 hover:opacity-100"
@@ -282,7 +282,7 @@ function ConfidentialStampInline() {
   return (
     <span
       aria-hidden
-      className="inline-block -rotate-6 border-[2px] border-signal px-3 py-1.5 font-mono text-[0.65rem] font-bold uppercase tracking-[0.25em] text-signal opacity-80 sm:text-xs"
+      className="inline-block -rotate-3 border-[1.5px] border-signal px-2 py-1 font-mono text-[0.55rem] font-bold uppercase tracking-[0.2em] text-signal opacity-80 sm:px-2.5 sm:py-1 sm:text-[0.65rem]"
     >
       CONFIDENTIAL
     </span>

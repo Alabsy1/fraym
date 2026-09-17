@@ -4,7 +4,7 @@ import { Tape } from "@/components/ui/Tape";
 
 export function HeroEvidenceBoard() {
   return (
-    <div className="relative isolate w-full pb-16 pt-4">
+    <div className="relative isolate w-full pt-4 pb-4 sm:pb-16">
       {/* ── photo stack ── */}
       <div className="relative">
         {/* backing sheet */}

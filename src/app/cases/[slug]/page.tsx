@@ -13,6 +13,7 @@ import { Tape } from "@/components/ui/Tape";
 import { GridBackdrop } from "@/components/ui/GridBackdrop";
 import { CtaLink } from "@/components/ui/CtaLink";
 import { Reveal } from "@/components/ui/Reveal";
+import { CaseGallery } from "@/components/CaseGallery";
 import { cn } from "@/lib/cn";
 
 interface Props {
@@ -114,6 +115,11 @@ export default async function CasePage({ params }: Props) {
           </div>
         </div>
       </section>
+
+      {/* ── Gallery ────────────────────────────────────────── */}
+      {item.galleryImages && item.galleryImages.length > 0 && (
+        <CaseGallery images={item.galleryImages} />
+      )}
 
       {/* ── Tabs ─────────────────────────────────────────────── */}
       <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">

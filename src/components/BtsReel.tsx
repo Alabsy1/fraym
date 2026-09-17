@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { SystemWindow } from "./ui/SystemWindow";
 
 const clips = [
-  { n: "A01", label: "roofline — still life", tone: "from-frame/60 to-paper-2" },
+  { n: "A01", label: "buono tours — red sea", tone: "from-frame/60 to-paper-2" },
   { n: "B03", label: "northlight — winter", tone: "from-tape/50 to-paper-2" },
   { n: "C07", label: "hemera — worn in", tone: "from-moss/50 to-paper-2" },
   { n: "D02", label: "kestrel — silence", tone: "from-plum to-terracotta/70" },

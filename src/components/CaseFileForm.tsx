@@ -34,7 +34,7 @@ export function CaseFileForm({ compact = false }: { compact?: boolean }) {
     });
   };
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
 
@@ -70,20 +70,28 @@ export function CaseFileForm({ compact = false }: { compact?: boolean }) {
     const whatsappUrl = `https://wa.me/201032944616?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, "_blank", "noopener,noreferrer");
 
-    fetch("/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name,
-        email,
-        phone,
-        company,
-        industry,
-        system: systemLabel,
-        services: selectedLabels,
-        brief,
-      }),
-    }).catch(() => {});
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          email,
+          phone,
+          company,
+          industry,
+          system: systemLabel,
+          services: selectedLabels,
+          brief,
+        }),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        console.error("Email API error:", res.status, data);
+      }
+    } catch (err) {
+      console.error("Failed to send email:", err);
+    }
 
     setSent(true);
   }

@@ -33,6 +33,8 @@ export interface CaseStudy {
   featured: boolean;
   personality: "eccentric" | "incline" | "casualist";
   accent: AccentColor;
+  coverImage?: string;
+  galleryImages?: { src: string; caption: string }[];
   brief: string;
   observe: string;
   impact: string;
@@ -177,33 +179,41 @@ export const serviceBySlug = (slug: string): Service | undefined =>
 
 export const cases: CaseStudy[] = [
   {
-    slug: "roofline-homeware",
-    client: "Roofline",
-    industry: "Home & Living",
-    year: "2025",
-    summary: "Reframing a furniture brand's identity from 'catalog' to 'still life'.",
+    slug: "buono-tours",
+    client: "Buono Tours",
+    industry: "Tourism & DMCs",
+    year: "2026",
+    summary: "One sign. Three worlds. One meaning — building a cohesive digital identity for Red Sea experiences.",
     services: ["signal", "frame"],
     status: "closed",
     featured: true,
-    personality: "casualist",
-    accent: "frame",
+    personality: "incline",
+    accent: "tape",
+    coverImage: "/buono/hero-buono.png",
+    galleryImages: [
+      { src: "/buono/hero-buono.png", caption: "BUONO_001 — brand identity" },
+      { src: "/buono/Beige Elegant Grid Coming Soon Promotion Instagram Post.png", caption: "BUONO_002 — digital presence" },
+      { src: "/buono/ChatGPT Image Aug 2, 2026, 01_22_17 PM.png", caption: "BUONO_003 — red sea moments" },
+      { src: "/buono/ChatGPT Image Aug 2, 2026, 01_48_29 PM.png", caption: "BUONO_004 — destination storytelling" },
+      { src: "/buono/2.png", caption: "BUONO_005 — three worlds" },
+    ],
     brief:
-      "Roofline was selling excellent furniture through a catalog that made it look like everybody else's. The brief: make the products feel like the protagonist of a quiet film — not an item on a spreadsheet.",
+      "Created specifically for Italian travelers who want far more than standard sightseeing. Buono Tours delivers authentic Red Sea adventures — from diving and snorkeling to immersive desert safaris. What it lacked was a cohesive digital presence that could make local expertise fully visible, recognizable, and trusted long before arrival in Egypt.",
     observe:
-      "We read the category's endless 'clean white room' imagery and noticed something missing: life. People buy furniture to live in it. Every signal pointed to warmth, texture and imperfection as the gap nobody was occupying.",
+      "Travelers wanting to discover and book excursions online faced fragmented information and generic operators. Buono Tours possessed deep local knowledge of the Red Sea but needed to translate that trust into digital touchpoints. The core question: How do we make travelers feel a sense of familiarity and local belonging before they even land in Egypt? Looking far beyond the destinations themselves to uncover the full spectrum of destination storytelling — spontaneous activities, shared meals, laughter by the campfire, and personal connections with local guides.",
     impact:
-      "The Still Life campaign lifted add-to-cart intent by 31% and repositioned Roofline as a brand people photographed, not just bought from. Organic social reach tripled on launch imagery.",
+      "Built around the unifying concept: 'One Sign. Three Worlds. One Meaning.' A powerful symbol that brings together universal signals across different languages, bridging the gap between foreign visitors and local hospitality. Photography became candid, warm, and documentary-style, highlighting human relationships and real moments.",
     quote: {
-      text: "FRAYM watched our products the way we never had. The brief came back like a photograph of something we'd always owned but never seen.",
-      author: "Mara Klein",
-      role: "Brand Director, Roofline",
+      text: "Live the moments. Tell stories for years.",
+      author: "Buono Tours",
+      role: "Hurghada & Red Sea Experiences",
     },
     metrics: [
-      { value: "+31%", label: "add-to-cart intent" },
-      { value: "3×", label: "organic reach" },
-      { value: "94%", label: "on-brand delivery" },
+      { value: "3", label: "worlds united under one sign" },
+      { value: "100%", label: "local expertise made visible" },
+      { value: "1", label: "cohesive digital identity" },
     ],
-    tags: ["Art Direction", "Campaign Photography", "Positioning"],
+    tags: ["Brand Identity", "Destination Storytelling", "Digital Presence"],
   },
   {
     slug: "northlight-craft-gin",
@@ -395,7 +405,7 @@ export const industries = [
 ];
 
 export const clientLogos = [
-  "Roofline",
+  "Buono Tours",
   "Northlight",
   "Atlas",
   "Hemera",

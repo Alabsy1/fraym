@@ -18,6 +18,30 @@ export function CaseCover({ item }: { item: CaseStudy }) {
   const a = (h % 13) - 6;
   const c = item.accent;
 
+  if (item.coverImage) {
+    return (
+      <div
+        className={`relative aspect-[4/3] w-full overflow-hidden border border-ink/15 ${softBg(c)}`}
+        aria-hidden
+      >
+        <img
+          src={item.coverImage}
+          alt={`${item.client} case study`}
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-ink/20 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-3">
+          <span className={`mono-label border ${softBorder(c)} bg-paper/90 px-2 py-1 text-[0.6rem]`}>
+            {item.industry}
+          </span>
+          <span className="mono-label text-[0.6rem] text-paper/90">
+            {item.year} · {item.personality}
+          </span>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div
       className={`relative aspect-[4/3] w-full overflow-hidden border border-ink/15 ${softBg(c)}`}

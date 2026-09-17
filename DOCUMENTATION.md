@@ -73,6 +73,7 @@ Every engagement follows: **Observe → Direct → Frame**
 | **TypeScript** | ^5.x | Strict mode, bundler resolution |
 | **Tailwind CSS** | v4 | Utility-first styling via `@theme` in CSS |
 | **Framer Motion** | ^12.43.0 | Animations, drag, layout transitions |
+| **Resend** | ^6.26.0 | Transactional email via `/api/contact` |
 
 ### TypeScript Configuration
 
@@ -204,6 +205,7 @@ Maps each `AccentColor` to Tailwind class strings:
 
 ```
 FRAYM/
+├── .env.example             # Environment variable template (RESEND_API_KEY)
 ├── .gitignore              # Ignores .env*, node_modules, .next, sam/, root *.png
 ├── AGENTS.md               # AI agent instructions
 ├── CLAUDE.md               # Claude-specific instructions
@@ -217,11 +219,11 @@ FRAYM/
 └── next-env.d.ts           # Auto-generated (do not edit)
 ```
 
-### `src/` — 56 Files Total
+### `src/` — 59 Files Total
 
 ```
 src/
-├── app/                          # App Router pages (13 files)
+├── app/                          # App Router pages + API (14 files)
 │   ├── layout.tsx                # Root layout: fonts, metadata, PageTransitionProvider
 │   ├── page.tsx                  # Homepage: Hero, BeforeAfter, ScrollDriven, Services, EvidenceBoard, Cases, Form
 │   ├── globals.css               # Tailwind v4 @theme design system (371 lines)
@@ -235,21 +237,23 @@ src/
 │   ├── journal/page.tsx          # Journal listing
 │   ├── journal/[slug]/page.tsx   # Individual journal posts (SSG)
 │   ├── services/page.tsx         # Services listing with ServiceBook
-│   └── services/[slug]/page.tsx  # Individual service pages (SSG)
+│   ├── services/[slug]/page.tsx  # Individual service pages (SSG)
+│   └── api/contact/route.ts      # POST endpoint — Resend email to thisisfraym@gmail.com
 │
-├── components/                   # Feature components (20 files)
+├── components/                   # Feature components (21 files)
 │   ├── HeroDossier.tsx           # Hero orchestrator: 2-column grid, composite center/right, overlay morph
 │   ├── HeroCaseFile.tsx          # Case file with tabs, metadata, interactive switching
 │   ├── HeroEvidenceBoard.tsx     # Center photo with framed gallery image
 │   ├── ScrollDrivenHero.tsx      # Frame Unit section with embedded video
 │   ├── BeforeAfter.tsx           # Image comparison slider
 │   ├── DossierSpread.tsx         # Full-screen dossier modal overlay
-│   ├── ServiceCard.tsx           # Service card with SVG previews
+│   ├── ServiceCard.tsx           # Service card with image previews
 │   ├── CaseCard.tsx              # Case study card
-│   ├── EvidenceBoard.tsx         # Draggable evidence board with polaroids
-│   ├── CaseFileForm.tsx          # Contact/case opening form
+│   ├── EvidenceBoard.tsx         # Draggable evidence board with pin images
+│   ├── CaseFileForm.tsx          # Contact/case opening form (WhatsApp + Resend email)
+│   ├── CaseGallery.tsx           # Evidence gallery with polaroid grid + lightbox
 │   ├── CasesExplorer.tsx         # Filterable case grid
-│   ├── CaseCover.tsx             # Case cover visual
+│   ├── CaseCover.tsx             # Case cover visual (real image or CSS collage)
 │   ├── CaseTabs.tsx              # Case tab navigation
 │   ├── BtsReel.tsx               # Behind-the-scenes reel
 │   ├── LogoMarquee.tsx           # Client logo marquee
@@ -286,7 +290,7 @@ src/
 └── lib/                          # Shared utilities (3 files)
     ├── cn.ts                     # Classname helper: filter(Boolean).join(" ")
     ├── color.ts                  # AccentColor → Tailwind class mapping
-    └── data.ts                   # Centralized content: services, cases, journal, team, etc. (524 lines)
+    └── data.ts                   # Centralized content: services, cases, journal, team, etc. (534 lines)
 ```
 
 ### `public/` — 16 Assets
@@ -323,11 +327,13 @@ src/
 | `/services` | Static | `services/page.tsx` | ServiceBook explorer, 4-step process |
 | `/services/[slug]` | SSG | `services/[slug]/page.tsx` | Individual service: hero, position, deliverables, process, related cases |
 | `/cases` | Static | `cases/page.tsx` | CasesExplorer, LogoMarquee, BtsReel |
-| `/cases/[slug]` | SSG | `cases/[slug]/page.tsx` | Individual case: cover, tabs, brief, observe, impact, metrics |
+| `/cases/[slug]` | SSG | `cases/[slug]/page.tsx` | Individual case: cover, gallery, tabs, brief, observe, impact, metrics |
 | `/journal` | Static | `journal/page.tsx` | Journal listing |
 | `/journal/[slug]` | SSG | `journal/[slug]/page.tsx` | Individual journal post |
 | `/contact` | Static | `contact/page.tsx` | Contact form, case file form |
 | `/careers` | Static | `careers/page.tsx` | Job listings, studio traits |
+| `/api/contact` | API | `api/contact/route.ts` | POST — sends email via Resend to `thisisfraym@gmail.com` |
+| `/api/contact` | API | `api/contact/route.ts` | POST — sends email via Resend to `thisisfraym@gmail.com` |
 
 ### Layout Hierarchy
 
@@ -345,7 +351,7 @@ RootLayout (src/app/layout.tsx)
 
 - `generateStaticParams()` in `[slug]` routes pre-builds all pages at build time
 - Services: 4 pages (`frame`, `direct`, `signal`, `full-frame`)
-- Cases: 7 pages (`roofline-homeware`, `northlight-craft-gin`, `atlas-finance`, `hemera-apparel`, `verdant-appetite`, `kestrel-field-recording`, `cinder-coffee`)
+- Cases: 7 pages (`buono-tours`, `northlight-craft-gin`, `atlas-finance`, `hemera-apparel`, `verdant-appetite`, `kestrel-field-recording`, `cinder-coffee`)
 - Journal: 5 pages
 
 ---
@@ -461,11 +467,27 @@ Case study card. Client component.
 
 #### `CaseCover.tsx` (212 lines)
 
-Case cover visual for individual case pages.
+Case cover visual for individual case pages. Two rendering modes:
+
+1. **With `coverImage`:** Renders real `<img>` with gradient overlay, industry label, year/personality bar
+2. **Without `coverImage`:** CSS-only generative collage based on `personality` type (eccentric/incline/casualist)
+
+Aspect ratio: 4:3 in both modes.
 
 #### `CaseTabs.tsx` (83 lines)
 
 Tab navigation for case study sections (brief, observe, impact).
+
+#### `CaseGallery.tsx` (109 lines)
+
+Evidence gallery with polaroid grid and lightbox. Client component.
+
+- **Grid:** 2 columns mobile, 3 columns desktop
+- **Polaroid style:** Each image wrapped in white bordered card with `shadow-paper`, subtle rotation (`ROTATIONS = [-2, 1.5, -1, 2, -1.5]`), tape decoration
+- **Hover:** Rotate -1deg, scale 1.02, shadow lift, image zoom
+- **Lightbox:** Full-screen modal with Framer Motion `AnimatePresence`, spring animation, backdrop blur, close button
+- **Data:** `galleryImages?: { src: string; caption: string }[]` on `CaseStudy` interface
+- **Conditionally rendered:** Only shows when case has `galleryImages` set (currently Buono Tours)
 
 #### `CasesExplorer.tsx` (109 lines)
 
@@ -700,7 +722,7 @@ All draggable elements use the `Draggable` wrapper component:
 
 ## 9. Content Data Layer
 
-### `src/lib/data.ts` (524 lines)
+### `src/lib/data.ts` (534 lines)
 
 Centralized content repository. All site data lives here.
 
@@ -729,13 +751,15 @@ interface CaseStudy {
   slug: string;
   client: string;
   industry: string;
-  year: number;
+  year: string;
   summary: string;
   services: string[];     // Service slugs
   status: "closed" | "in-progress";
   featured: boolean;
   personality: "eccentric" | "incline" | "casualist";
   accent: AccentColor;
+  coverImage?: string;           // Optional real image path (e.g., "/buono/hero-buono.png")
+  galleryImages?: { src: string; caption: string }[]; // Optional gallery images
   brief: string;
   observe: string;
   impact: string;
@@ -750,7 +774,7 @@ interface CaseStudy {
 | Export | Count | Description |
 |--------|-------|-------------|
 | `services` | 4 | Frame, Direct, Signal, Full Frame |
-| `cases` | 7 | Roofline, Northlight, Atlas, Hemera, Verdant, Kestrel, Cinder |
+| `cases` | 7 | Buono Tours, Northlight, Atlas, Hemera, Verdant, Kestrel, Cinder |
 | `journalPosts` | 5 | Articles spanning Oct 2025 – Jun 2026 |
 | `team` | 6 | Ada Mercer, Jon Bell, Lena Okafor, Theo Marais, Yuki Sato, Rafael Nunes |
 | `beliefs` | 6 | Studio belief statements |
@@ -770,30 +794,41 @@ interface CaseStudy {
 
 ## 10. Asset Inventory
 
-### Public Assets (16 files)
+### Public Assets (44 files)
 
-| Asset | Dimensions | Used In | Description |
-|-------|-----------|---------|-------------|
-| `1.png` | — | `HeroEvidenceBoard` | Central gallery photograph |
-| `layer1.png` | — | `HeroCaseFile` | Manila folder background texture |
-| `layer2.png` | — | (unused) | Paper card with tape overlay |
-| `left.png` | — | `BeforeAfter` | Before comparison image |
-| `right.png` | — | `BeforeAfter` | After comparison image |
-| `scene-video.mp4` | — | `ScrollDrivenHero` | Frame Unit video loop |
-| `frame.png` | — | `ServiceCard` | Frame System card visual |
-| `direct.png` | — | `ServiceCard` | Direct System card visual |
-| `signal.png` | — | `ServiceCard` | Signal System card visual |
-| `full-frame.png` | — | `ServiceCard` | Full Frame System card visual |
-| `board-1.png` | — | `EvidenceBoard` | Evidence piece: coastal light study |
-| `board-2.png` | — | `EvidenceBoard` | Evidence piece: frame decision |
-| `board-3.png` | — | `EvidenceBoard` | Evidence piece: exposure map |
-| `board-4.png` | — | `EvidenceBoard` | Evidence piece: deliberate light |
-| `board-5.png` | — | `EvidenceBoard` | Evidence piece: scene context |
-| `board-6.png` | — | `EvidenceBoard` | Evidence piece: planning board |
+#### Root Assets (22 files)
+
+| Asset | Used In | Description |
+|-------|---------|-------------|
+| `1.png` | `HeroEvidenceBoard` | Central gallery photograph |
+| `layer1.png` | `HeroCaseFile` | Manila folder background texture |
+| `layer2.png` | (unused) | Paper card with tape overlay |
+| `left.png` | `BeforeAfter` | Before comparison image |
+| `left-new.png` | `BeforeAfter` | Updated before comparison image |
+| `right.png` | `BeforeAfter` | After comparison image |
+| `scene-video.mp4` | `ScrollDrivenHero` | Frame Unit video loop |
+| `frame.png` | `ServiceCard` | Frame System card visual |
+| `direct.png` | `ServiceCard` | Direct System card visual |
+| `signal.png` | `ServiceCard` | Signal System card visual |
+| `full-frame.png` | `ServiceCard` | Full Frame System card visual |
+| `pin-1.png` – `pin-5.png` | `EvidenceBoard` | 5 draggable polaroid evidence images |
+| `board-1.png` – `board-6.png` | `EvidenceBoard` | 6 evidence board pieces |
+
+#### `public/buono/` — Buono Tours Case Assets (22 files)
+
+| Asset | Description |
+|-------|-------------|
+| `hero-buono.png` | Hero/cover image for Buono Tours case |
+| `buono1.png` | Brand identity image |
+| `Artboard 1.png`, `Artboard 4.png` | Design assets |
+| `2.png` | Supporting visual |
+| `Beige Elegant Grid Coming Soon Promotion Instagram Post.png` | Social media asset |
+| `Untitled design (1).png` | Design composition |
+| 14 × `ChatGPT Image *.png` | Generated visuals (Jul–Aug 2026) |
 
 ### Root-Level Assets (not in public, gitignored)
 
-Original/unprocessed files: `fraym.png`, `Direct System.png`, `Signal System.png`, `full fraym.png`, `layer 1.png`, `layer 2.png`, `1.png`, plus 5 ChatGPT-generated images.
+Original/unprocessed files: `fraym.png`, `Direct System.png`, `Signal System.png`, `full fraym.png`, `layer 1.png`, `layer 2.png`, `1.png`, plus ChatGPT-generated images.
 
 ---
 
@@ -807,6 +842,7 @@ Original/unprocessed files: `fraym.png`, `Direct System.png`, `Signal System.png
 | `react` | 19.2.4 | UI library |
 | `react-dom` | 19.2.4 | DOM renderer |
 | `framer-motion` | ^12.43.0 | Animations, drag, layout transitions |
+| `resend` | ^6.26.0 | Transactional email via `/api/contact` |
 
 ### Dev Dependencies
 
@@ -876,7 +912,7 @@ export default [
 
 ### `.gitignore`
 
-Covers: `.env*`, `node_modules/`, `.next/`, `build/`, `sam/`, root `*.png`, IDE files.
+Covers: `.env*`, `node_modules/`, `.next/`, `build/`, `sam/`, root `*.png`, IDE files, OS files.
 
 ---
 

@@ -216,8 +216,8 @@ export function HeroDossier() {
             </Reveal>
 
             {/* case file — full natural width, overlapping photo right edge */}
-            <Reveal delay={200} className="relative z-20 bg-[#EFECE6] lg:absolute lg:right-0 lg:top-0 lg:h-full lg:w-[48%]">
-              <div ref={cardRef}>
+            <Reveal delay={200} className="relative z-20 lg:absolute lg:right-0 lg:top-0 lg:h-full lg:w-[48%]">
+              <div ref={cardRef} className="h-full">
                 <HeroCaseFile active={active} onSelect={handleSelect} />
               </div>
             </Reveal>
