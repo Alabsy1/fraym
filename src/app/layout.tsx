@@ -34,14 +34,15 @@ const spaceMono = Space_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://fraym.studio"),
   title: {
-    default: "FRAYM — A Perception Studio",
+    default: "FRAYM — A Creative + Business Solutions Studio",
     template: "%s · FRAYM",
   },
   description:
-    "FRAYM is an observation studio. We observe, we direct, we frame — turning brands, campaigns and ideas into work people feel. Open a case.",
+    "FRAYM is a creative + business solutions studio. We investigate what brands, businesses and experiences need, then use strategy, creative direction and production to move them forward.",
   keywords: [
     "FRAYM",
-    "perception studio",
+    "creative studio",
+    "business solutions studio",
     "brand studio",
     "creative direction",
     "campaign photography",
@@ -50,15 +51,15 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     type: "website",
-    siteName: "FRAYM — A Perception Studio",
-    title: "FRAYM — A Perception Studio",
+    siteName: "FRAYM — A Creative + Business Solutions Studio",
+    title: "FRAYM — A Creative + Business Solutions Studio",
     description:
-      "We observe, we direct, we frame. An observation studio for brands, campaigns and ideas.",
+      "We observe. We direct. We frame. A creative + business solutions studio for brands, businesses and experiences.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "FRAYM — A Perception Studio",
-    description: "We observe, we direct, we frame.",
+    title: "FRAYM — A Creative + Business Solutions Studio",
+    description: "We observe. We direct. We frame.",
   },
   robots: {
     index: true,

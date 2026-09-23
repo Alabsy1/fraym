@@ -106,7 +106,7 @@ export function ServiceCard({
               ? active
                 ? "close the file"
                 : "pull the tab"
-              : `open the ${service.short.toLowerCase()} file`}
+              : `explore ${service.short.toLowerCase()}`}
           </span>
           {interactive ? (
             <span

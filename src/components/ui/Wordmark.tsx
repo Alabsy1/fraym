@@ -22,7 +22,9 @@ export function Wordmark({ size = "md" }: { size?: "md" | "lg" }) {
           FRAYM
         </span>
         <span className="mono-label mt-1 text-[0.55rem] text-ink-soft">
-          A Perception Studio
+          Creative + Business
+          <br />
+          Solutions Studio
         </span>
       </span>
     </span>

@@ -79,7 +79,7 @@ export function CaseCard({
               ))}
             </div>
             <span className="mono-label text-ink-soft">
-              Read the file <span aria-hidden>→</span>
+              View case <span aria-hidden>→</span>
             </span>
           </div>
         </div>
@@ -117,6 +117,14 @@ export function CaseCard({
           </span>
         </div>
         <p className="text-sm leading-relaxed text-ink-soft">{item.summary}</p>
+        {item.question && (
+          <div>
+            <p className="mono-label text-ink-faint">The question</p>
+            <p className="mt-1 text-sm italic leading-relaxed text-ink">
+              {item.question}
+            </p>
+          </div>
+        )}
         <div className="mt-auto flex items-center justify-between border-t border-ink/10 pt-3">
           <span className="mono-label text-ink-faint">
             {item.industry} · {item.year}

@@ -44,7 +44,7 @@ export default async function CasePage({ params }: Props) {
   const next = cases[(index + 1) % cases.length];
   const prev = cases[(index - 1 + cases.length) % cases.length];
 
-  const tabs = buildTabs(item);
+  const tabs = buildTabs(item, `FR-${String(index + 1).padStart(3, "0")}`);
 
   return (
     <div>
@@ -195,7 +195,7 @@ function PrevNext({
   );
 }
 
-function buildTabs(item: CaseStudy): TabItem[] {
+function buildTabs(item: CaseStudy, caseNo: string): TabItem[] {
   const tabs: TabItem[] = [
     {
       id: "brief",
@@ -204,7 +204,7 @@ function buildTabs(item: CaseStudy): TabItem[] {
       content: (
         <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr]">
           <div>
-            <TabLabel label="The Brief" />
+            <TabLabel label="Brief — the question" />
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink md:text-xl">
               {item.brief}
             </p>
@@ -214,11 +214,13 @@ function buildTabs(item: CaseStudy): TabItem[] {
             <TabLabel label="File summary" />
             <dl className="mt-4 space-y-3 text-sm">
               {[
+                ["Case", caseNo],
                 ["Client", item.client],
                 ["Industry", item.industry],
+                ...(item.location ? [["Location", item.location]] : []),
                 ["Year", item.year],
-                ["Status", item.status === "closed" ? "Case Closed" : "In Progress"],
-                ["Systems", item.services.map((s) => s.replace("-", " ")).join(" · ")],
+                ["Scope", item.services.map((s) => s.replace("-", " ")).join(" · ")],
+                ["Status", item.status === "closed" ? "Completed" : "In Progress"],
               ].map(([k, v]) => (
                 <div key={k} className="flex justify-between gap-4 border-b border-ink/10 pb-2">
                   <dt className="mono-label text-ink-faint">{k}</dt>
@@ -239,7 +241,7 @@ function buildTabs(item: CaseStudy): TabItem[] {
     content: (
       <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr]">
         <div>
-          <TabLabel label="The Observation" />
+          <TabLabel label="Observe — what we found" />
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink md:text-xl">
             {item.observe}
           </p>
@@ -251,7 +253,7 @@ function buildTabs(item: CaseStudy): TabItem[] {
                 observed before opinion. read twice, acted once.
               </p>
               <p className="mono-label mt-4 text-[0.6rem] text-paper/60">
-                SIGNAL SYSTEM · OBSERVATION LOG
+                OBSERVE · EVIDENCE COLLECTED
               </p>
             </div>
           </SystemWindow>
@@ -260,9 +262,9 @@ function buildTabs(item: CaseStudy): TabItem[] {
     ),
   });
 
-  const order: Record<string, number> = { frame: 0, direct: 1, signal: 2 };
-  const purchased = [...item.services].sort(
-    (a, b) => (order[a] ?? 3) - (order[b] ?? 3)
+  // Full Frame covers every system, so it opens all three service tabs.
+  const purchased = (["frame", "direct", "signal"] as const).filter(
+    (s) => item.services.includes(s) || item.services.includes("full-frame")
   );
   for (const s of purchased) {
     const service = serviceBySlug(s);
@@ -277,7 +279,7 @@ function buildTabs(item: CaseStudy): TabItem[] {
       <div>
         <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr]">
           <div>
-            <TabLabel label="The Impact" />
+            <TabLabel label="Impact — what changed" />
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink md:text-xl">
               {item.impact}
             </p>
@@ -312,30 +314,45 @@ function buildTabs(item: CaseStudy): TabItem[] {
   return tabs;
 }
 
+const tabHeading: Record<"frame" | "direct" | "signal", string> = {
+  frame: "Frame — the strategic / creative move",
+  direct: "Direct — how the idea was shaped",
+  signal: "Signal — how it moved",
+};
+
 function serviceTab(item: CaseStudy, service: Service): TabItem {
   const c = service.color;
+  const key = service.slug as keyof typeof tabHeading;
+  const documented = item[key];
   return {
     id: service.slug,
-    label: service.system,
+    label: service.short,
     shortLabel: service.short,
     content: (
       <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr]">
         <div>
-          <TabLabel label={`${service.system} in this case`} />
-          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink">
-            For {item.client}, the {service.system.toLowerCase()} ran on its core
-            promise: <em className="text-ink">{service.verb.toLowerCase()}</em>.{" "}
-            {service.tagline} The engagement in {item.year} applied this system
-            directly to the brief — {item.summary.toLowerCase()}
-          </p>
-          <p className="hand mt-4 text-2xl text-ink-soft">
-            the field note: {service.process[0].detail}
-          </p>
+          <TabLabel label={tabHeading[key]} />
+          {documented ? (
+            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink md:text-xl">
+              {documented}
+            </p>
+          ) : (
+            <>
+              <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink">
+                {service.tagline} For {item.client}, the{" "}
+                {service.system.toLowerCase()} was applied directly to the
+                brief — {item.summary.toLowerCase()}
+              </p>
+              <p className="hand mt-4 text-2xl text-ink-soft">
+                the field note: {service.process[0].detail}
+              </p>
+            </>
+          )}
         </div>
         <div className="space-y-6">
           <div className="case-sheet case-holes relative p-6">
             <Tape color={`var(--color-${c})`} rotation={-3} className="absolute -top-3 left-8" />
-            <TabLabel label="Deliverables involved" />
+            <TabLabel label="What this system covers" />
             <ul className="mt-4 space-y-2.5">
               {service.deliverables.slice(0, 4).map((d) => (
                 <li key={d} className="flex items-start gap-2.5 text-sm text-ink-soft">
@@ -347,7 +364,7 @@ function serviceTab(item: CaseStudy, service: Service): TabItem {
           </div>
           <div className="case-sheet case-holes relative p-6">
             <Tape color={`var(--color-${c})`} rotation={2} className="absolute -top-3 right-8" />
-            <TabLabel label="Process in the field" />
+            <TabLabel label="How we work" />
             <ol className="mt-4 space-y-3">
               {service.process.slice(0, 3).map((step, i) => (
                 <li key={step.step} className="flex gap-3 text-sm">

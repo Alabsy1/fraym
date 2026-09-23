@@ -88,7 +88,7 @@ function MuseumLit() {
       {/* caption chip */}
       <div className="absolute bottom-3 left-3 bg-[#191009]/90 px-2.5 py-1.5">
         <p className="mono-label text-[0.6rem] text-[#f2e2bd]">
-          AFTER THE FRAME — gallery light
+          RECOGNIZED
         </p>
       </div>
     </div>
@@ -107,7 +107,7 @@ function RawRoom() {
       {/* caption chip */}
       <div className="absolute bottom-3 left-3 bg-[#4a463c]/90 px-2.5 py-1.5">
         <p className="mono-label text-[0.6rem] text-[#efe9d8]">
-          BEFORE THE FRAME — unlit, undecided
+          UNSEEN
         </p>
       </div>
     </div>

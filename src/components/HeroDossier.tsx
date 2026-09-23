@@ -20,6 +20,7 @@ import { HeroEvidenceBoard } from "@/components/HeroEvidenceBoard";
 import { DossierSpread } from "@/components/DossierSpread";
 import { CircleHighlight } from "@/components/ui/FramedHighlight";
 import { StickyNote } from "@/components/ui/StickyNote";
+import { CtaLink } from "@/components/ui/CtaLink";
 
 const ORDER: TabId[] = ["frame", "direct", "signal", "full"];
 const MORPH = { type: "spring" as const, stiffness: 380, damping: 28 };
@@ -134,12 +135,12 @@ export function HeroDossier() {
             <Reveal>
               <p className="mono-label mb-6 flex items-center gap-3 text-ink-soft">
                 <span className="inline-block h-px w-10 bg-ink/30" />
-                CASE FILE
+                CASE OPENED
               </p>
             </Reveal>
             <Reveal delay={40}>
               <p className="font-mono text-sm font-bold text-signal mb-6">
-                FR-009
+                FR-001
               </p>
             </Reveal>
             <Reveal delay={80}>
@@ -180,10 +181,19 @@ export function HeroDossier() {
             </Reveal>
             <Reveal delay={160}>
               <p className="mt-8 max-w-xl text-base leading-relaxed text-ink-soft md:text-lg">
-                Perception is shaped by what people see, feel and believe.
-                We build what&apos;s{" "}
-                <CircleHighlight>real.</CircleHighlight>
+                Every brand has more to it than what first meets the eye.
+                We investigate what is there, uncover what is missing, and
+                shape it into something people can see, feel and{" "}
+                <CircleHighlight>remember.</CircleHighlight>
               </p>
+            </Reveal>
+            <Reveal delay={200}>
+              <div className="mt-8 flex flex-wrap gap-4">
+                <CtaLink href="/contact">Open a Case</CtaLink>
+                <CtaLink href="/cases" variant="outline" tone="ink">
+                  See Our Work
+                </CtaLink>
+              </div>
             </Reveal>
             <Reveal delay={240}>
               <div className="mt-12 flex items-center gap-3 text-ink-faint">
@@ -226,7 +236,7 @@ export function HeroDossier() {
             <Reveal delay={200} className="pointer-events-none absolute bottom-[20%] left-[48%] z-30 hidden w-44 -rotate-2 animate-float lg:block">
               <StickyNote tone="frame" rotation={0}>
                 <p className="hand text-xl leading-snug text-ink">
-                  Context changes everything.
+                  What people see is only the beginning.
                 </p>
               </StickyNote>
             </Reveal>

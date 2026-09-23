@@ -28,18 +28,16 @@ export default function ServicesPage() {
           <div className="flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
             <Reveal delay={60}>
               <h1 className="max-w-3xl font-display text-4xl font-semibold leading-[1.02] tracking-tight text-ink sm:text-6xl">
-                Four systems.
+                What we do.
                 <br />
-                <span className="text-ink-soft">One method.</span>
+                <span className="text-ink-soft">How we move ideas.</span>
               </h1>
             </Reveal>
             <Reveal delay={140}>
               <div className="max-w-sm">
                 <p className="text-sm leading-relaxed text-ink-soft">
-                  Every engagement is a case. Every case runs on one or more of
-                  the systems below — observed first, directed second, framed
-                  third. Select a system to see its position, deliverables and
-                  process.
+                  From the first question to the final execution, FRAYM
+                  connects thinking with making.
                 </p>
                 <p className="hand mt-3 text-xl text-ink-soft">
                   open each system. pull the tab.
@@ -65,7 +63,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <section className="bg-paper-2">
+      <section id="process" className="scroll-mt-20 bg-paper-2">
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
           <SectionTitle
             eyebrow="How it runs"
@@ -81,7 +79,7 @@ export default function ServicesPage() {
               {
                 n: "01",
                 t: "Observe",
-                d: "The brief arrives and the Signal System reads the room. We read it twice — once for what it says, once for what it omits.",
+                d: "The brief arrives and we read the room. We read it twice — once for what it says, once for what it omits.",
               },
               {
                 n: "02",
@@ -96,7 +94,7 @@ export default function ServicesPage() {
               {
                 n: "04",
                 t: "Signal",
-                d: "The direction is tested against the reading, and every deliverable ships in one voice.",
+                d: "Content, social and media keep the story moving — a consistent presence without losing the idea behind it.",
               },
             ].map((step, i) => (
               <Reveal key={step.n} delay={i * 80}>

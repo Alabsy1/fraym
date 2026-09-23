@@ -37,9 +37,14 @@ export default function ContactPage() {
           </Reveal>
           <Reveal delay={160}>
             <p className="mt-6 max-w-xl text-base leading-relaxed text-ink-soft md:text-lg">
-              Every engagement begins as a case file. Fill it in below — or use
-              any of the channels on this page. Every case gets read by a human
-              observer before it gets a file number.
+              Have a problem to solve?
+              <br />
+              A business to move?
+              <br />
+              A brand that needs direction?
+              <br />
+              <br />
+              Open a case.
             </p>
           </Reveal>
         </div>

@@ -7,6 +7,7 @@ import { Draggable } from "@/components/ui/Draggable";
 import { Polaroid } from "@/components/ui/Polaroid";
 import { SignalReveal } from "@/components/ui/SignalReveal";
 import { CircleHighlight } from "@/components/ui/FramedHighlight";
+import { CtaLink } from "@/components/ui/CtaLink";
 
 const boardImages: {
   src: string;
@@ -16,11 +17,11 @@ const boardImages: {
   rotate: number;
   rotation: number;
 }[] = [
-  { src: "/pin-1.png", caption: "raw evidence — unframed capture.", top: "8%", left: "6%", rotate: -6, rotation: -6 },
-  { src: "/pin-2.png", caption: "deliberate light — after the frame.", top: "58%", left: "8%", rotate: 3, rotation: 3 },
-  { src: "/pin-3.png", caption: "scene context — pinned evidence.", top: "62%", left: "62%", rotate: -4, rotation: -4 },
-  { src: "/pin-4.png", caption: "planning board — coastal shoot layout.", top: "42%", left: "25%", rotate: 5, rotation: 5 },
-  { src: "/pin-5.png", caption: "exposure map — motion vectors detected.", top: "18%", left: "72%", rotate: -2, rotation: -2 },
+  { src: "/pin-1.png", caption: "question / observation", top: "8%", left: "6%", rotate: -6, rotation: -6 },
+  { src: "/pin-2.png", caption: "audience / behavior pattern", top: "58%", left: "8%", rotate: 3, rotation: 3 },
+  { src: "/pin-3.png", caption: "cultural context", top: "62%", left: "62%", rotate: -4, rotation: -4 },
+  { src: "/pin-4.png", caption: "competitor / perception gap", top: "42%", left: "25%", rotate: 5, rotation: 5 },
+  { src: "/pin-5.png", caption: "opportunity", top: "18%", left: "72%", rotate: -2, rotation: -2 },
 ];
 
 export function EvidenceBoard() {
@@ -33,14 +34,20 @@ export function EvidenceBoard() {
           eyebrow="The Evidence Board"
           title={
             <>
-              Pin it. Move it.{" "}
+              Observe. Understand.{" "}
               <span className="text-ink-soft">
-                <CircleHighlight>Read the room.</CircleHighlight>
+                <CircleHighlight>Frame.</CircleHighlight>
               </span>
             </>
           }
-          description="Every case starts as pinned scraps and pulled threads. Nothing is locked — drag the notes, the polaroids, the system readout. The method is physical before it is digital."
+          description="Every project begins with observation. We collect evidence, connect the dots and uncover what others overlook."
         />
+
+        <div className="mt-6">
+          <CtaLink href="/services#process" variant="outline" tone="ink">
+            View Our Process
+          </CtaLink>
+        </div>
 
         <div className="mt-5 flex flex-wrap items-center gap-3">
           <SignalReveal

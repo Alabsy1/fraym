@@ -15,10 +15,10 @@ export interface Service {
   tagline: string;
   color: AccentColor;
   position: string;
+  problem: string;
   description: string;
   deliverables: string[];
   process: { step: string; detail: string }[];
-  metrics: { value: string; label: string }[];
   seoDescription: string;
 }
 
@@ -27,7 +27,9 @@ export interface CaseStudy {
   client: string;
   industry: string;
   year: string;
+  location?: string;
   summary: string;
+  question?: string;
   services: Service["slug"][];
   status: "closed" | "in-progress";
   featured: boolean;
@@ -43,6 +45,9 @@ export interface CaseStudy {
   }[];
   brief: string;
   observe: string;
+  frame?: string;
+  direct?: string;
+  signal?: string;
   impact: string;
   quote: { text: string; author: string; role: string };
   metrics: { value: string; label: string }[];
@@ -54,129 +59,116 @@ export const services: Service[] = [
     slug: "frame",
     system: "Frame System",
     number: "01",
-    verb: "We frame.",
+    verb: "Find the position.",
     short: "Frame",
-    tagline: "The still that holds the argument.",
+    tagline: "We find the story underneath the surface.",
     color: "frame",
-    position: "Frame is the lens. Photography, art direction and still craft that decide exactly what the world is allowed to see — and how it feels when it sees it.",
+    position: "Positioning, identity and strategy built from what we discover — not what is already being said.",
+    problem:
+      "A brand without a clear position gets read however the market chooses. Frame gives it one — built from evidence, not assumptions.",
     description:
-      "The Frame System is where a brand's visible world is composed. Not just a photograph — a decision about the edges of the frame, the light inside it, the object left out of it. We build campaign imagery, product worlds and brand systems with the patience of a painter and the discipline of a proofreader.",
+      "We investigate the business, the category, the audience and the culture around the brand — what it is, what it could become, and what is standing in the way.",
     deliverables: [
-      "Campaign & hero photography",
-      "Art direction & set design",
-      "Product & packaging worlds",
-      "Brand image systems",
-      "Editorial layouts & grids",
+      "Positioning",
+      "Identity",
+      "Strategy",
+      "Brand direction",
     ],
     process: [
-      { step: "Observe the room", detail: "We study the category, the shelf, the feed. We note what everyone else frames, so we can frame otherwise." },
-      { step: "Draw the frame", detail: "Moodboards, reference walls, and honest conversations about what deserves to be seen." },
-      { step: "Direct the light", detail: "Casting, locations, sets and lighting diagrams — the furniture of the frame." },
-      { step: "Print the decision", detail: "Select, grade, refine. Deliver the frame with the argument intact." },
-    ],
-    metrics: [
-      { value: "+31%", label: "add-to-cart intent" },
-      { value: "3×", label: "organic reach, launch imagery" },
-      { value: "94%", label: "on-brand delivery" },
+      { step: "Investigate the problem", detail: "We question the brief, study the business and listen to the people around it." },
+      { step: "Understand the context", detail: "People, place, language, habits and culture — everything that shapes how the brand is understood." },
+      { step: "Find the opportunity", detail: "We find the tension, and what others might have missed." },
+      { step: "Frame the direction", detail: "A clear position, identity and strategy the rest of the work can be built from." },
     ],
     seoDescription:
-      "FRAYM's Frame System: campaign photography, art direction and image systems that decide what the world is allowed to see.",
+      "FRAYM's Frame System: positioning, identity and strategy built from what we discover — not what is already being said.",
   },
   {
     slug: "direct",
     system: "Direct System",
     number: "02",
-    verb: "We direct.",
+    verb: "Shape the idea.",
     short: "Direct",
-    tagline: "The scene, the timing, the temperature.",
+    tagline: "We turn direction into something people can see.",
     color: "tape",
-    position: "Direct is the method. Film, motion and storytelling directed with intent — where every cut, beat and silence has already been rehearsed.",
+    position: "Creative direction, campaigns and production built around a clear idea — and made to move the business forward.",
+    problem:
+      "A strong direction that never takes shape doesn't move anyone. Direct turns it into work people can see, feel and remember.",
     description:
-      "The Direct System is the studio's motion arm. Direction isn't shouting action — it is knowing the story before anyone arrives on set, then making room for the accident worth keeping. From brand films to campaign motion systems, we direct the scene until it means what we intend.",
+      "We investigate what the idea needs to say, who needs to see it, and how it should look, sound and feel in the places people actually meet it.",
     deliverables: [
-      "Brand & campaign films",
-      "Director-led commercial shoots",
-      "Motion & short-form systems",
-      "Casting & performance direction",
-      "Post-production supervision",
+      "Creative direction",
+      "Campaigns",
+      "Production",
+      "Visual language",
+      "Key executions",
     ],
     process: [
-      { step: "Find the spine", detail: "We locate the one line of truth the film must hold, and build everything around it." },
-      { step: "Rehearse the scene", detail: "Treatments, shot lists and boards. We direct on paper before we direct on set." },
-      { step: "Run the room", detail: "On-set direction that keeps the idea loud and the ego quiet." },
-      { step: "Cut to the bone", detail: "Edit, grade and sound — until every frame still answers the brief." },
-    ],
-    metrics: [
-      { value: "#1", label: "category, launch week" },
-      { value: "11 days", label: "first run sold out" },
-      { value: "4.2M", label: "launch film views" },
+      { step: "Find the idea", detail: "We locate the one clear idea the work must hold, and build everything around it." },
+      { step: "Shape the direction", detail: "Campaign thinking, visual language and treatments — directed on paper before anything is made." },
+      { step: "Produce", detail: "Shoots, films and executions directed with intent, so the idea stays clear." },
+      { step: "Refine", detail: "Edit, remove, refine, reveal — until every piece still answers the brief." },
     ],
     seoDescription:
-      "FRAYM's Direct System: brand films, commercial direction and motion systems directed with intent and rehearsed on paper.",
+      "FRAYM's Direct System: creative direction, campaigns and production built around a clear idea — and made to move the business forward.",
   },
   {
     slug: "signal",
     system: "Signal System",
     number: "03",
-    verb: "We observe.",
+    verb: "Keep it moving.",
     short: "Signal",
-    tagline: "The observation that becomes advantage.",
+    tagline: "We keep the story moving.",
     color: "signal",
-    position: "Signal is the reading. Research, cultural observation and positioning that turn noise in the market into a clear, usable direction.",
+    position: "Content, social and media that give brands a consistent presence without losing the idea behind it.",
+    problem:
+      "Brands often lose the idea somewhere between the launch and the everyday. Signal keeps the presence consistent and the story intact.",
     description:
-      "The Signal System is where observation becomes an asset. We read the room the way a good detective reads a scene — quietly, patiently, and with an eye for the detail everyone else walked past. Out of that reading comes positioning, messaging and creative strategy that feel obvious only in hindsight.",
+      "We investigate where the audience spends its attention, how it behaves there, and what the brand needs to say to stay clear and consistent over time.",
     deliverables: [
-      "Cultural & category observation",
-      "Audience reading & insight",
-      "Positioning & messaging",
-      "Creative & content strategy",
-      "Perception audits",
+      "Content",
+      "Social",
+      "Media",
+      "Content strategy & calendars",
+      "Ongoing brand presence",
     ],
     process: [
-      { step: "Read the room", detail: "Interviews, shelf studies, comment sections and stats. We go where the attention actually lives." },
-      { step: "Name the pattern", detail: "We compress noise into a pattern, and the pattern into a usable idea." },
-      { step: "Stress the idea", detail: "We argue against our own finding before it ever meets the client." },
-      { step: "Hand over the direction", detail: "A clear, defensible position the whole studio can build from." },
-    ],
-    metrics: [
-      { value: "+22%", label: "message comprehension" },
-      { value: "9/10", label: "positions survived the stress test" },
-      { value: "42→1", label: "signals, distilled to one direction" },
+      { step: "Read the channels", detail: "We study where attention lives and how the audience behaves there." },
+      { step: "Plan the story", detail: "Content pillars, formats and calendars built from the brand's position." },
+      { step: "Make and publish", detail: "Content produced and published with the same idea behind every piece." },
+      { step: "Keep it consistent", detail: "We review what lands, refine what doesn't, and keep the story moving." },
     ],
     seoDescription:
-      "FRAYM's Signal System: cultural observation, positioning and strategy that turn market noise into a clear, defensible direction.",
+      "FRAYM's Signal System: content, social and media that give brands a consistent presence without losing the idea behind it.",
   },
   {
     slug: "full-frame",
     system: "Full Frame",
     number: "04",
-    verb: "We frame.",
+    verb: "Connect the whole thing.",
     short: "Full Frame",
-    tagline: "The whole case, end to end.",
+    tagline: "When the whole picture needs to move as one ecosystem.",
     color: "moss",
-    position: "Full Frame is the entire case. Observation, direction and framing delivered as one continuous motion — from first signal to final frame.",
+    position: "We work across the brand, the experience and the business — connecting the pieces so they work as one.",
+    problem:
+      "When the brand, the experience and the business are handled separately, the pieces pull in different directions. Full Frame connects them.",
     description:
-      "Full Frame is the studio's complete engagement. One case file, one team, one through-line. We observe the room, direct the story and frame the work so it lands together. For brands that want the perception handled as a single, coherent system rather than a series of hand-offs.",
+      "We investigate the whole picture — the brand, the experience, the operation and the business, offline and online — and where each piece is holding the others back.",
     deliverables: [
-      "Perception & brand strategy",
-      "Campaign ideation & architecture",
-      "Photography, film & direction",
-      "Image, motion & identity systems",
-      "Launch & rollout support",
+      "Ecosystem",
+      "Growth",
+      "Partnerships",
+      "Full business solutions — offline & online",
+      "Growth & performance",
     ],
     process: [
-      { step: "Open the case", detail: "We convene the full team around the brief and agree what winning looks like." },
-      { step: "Observe", detail: "Signal System readings shape the ground truth of the work." },
-      { step: "Direct", detail: "The story gets a spine, a cast and a plan for production." },
-      { step: "Frame & deliver", detail: "Every deliverable ships in one voice, one grade, one standard." },
-    ],
-    metrics: [
-      { value: "1", label: "through-line, end to end" },
-      { value: "+22%", label: "comprehension uplift" },
-      { value: "6/6", label: "deliverables, one voice" },
+      { step: "Open the case", detail: "We convene the full team around the brief and agree what the business needs to move." },
+      { step: "Observe", detail: "We collect evidence across the brand, the experience and the business." },
+      { step: "Frame & direct", detail: "One position, one idea and one plan — across every touchpoint." },
+      { step: "Make it real", detail: "Execution, partnerships and growth, delivered as one connected system." },
     ],
     seoDescription:
-      "FRAYM's Full Frame: end-to-end observation, direction and framing as one continuous engagement — from first signal to final frame.",
+      "FRAYM's Full Frame: ecosystem, growth, partnerships and full business solutions — connecting the brand, the experience and the business so they work as one.",
   },
 ];
 
@@ -189,8 +181,11 @@ export const cases: CaseStudy[] = [
     client: "Buono Tours",
     industry: "Tourism & DMCs",
     year: "2026",
+    location: "Hurghada, Red Sea",
     summary: "One sign. Three worlds. One meaning — building a cohesive digital identity for Red Sea experiences.",
-    services: ["signal", "frame"],
+    question:
+      "How do we make travelers feel a sense of familiarity and local belonging before they even land in Egypt?",
+    services: ["frame", "signal"],
     status: "closed",
     featured: true,
     personality: "incline",
@@ -216,7 +211,6 @@ export const cases: CaseStudy[] = [
     },
     metrics: [
       { value: "3", label: "worlds united under one sign" },
-      { value: "100%", label: "local expertise made visible" },
       { value: "1", label: "cohesive digital identity" },
     ],
     tags: ["Brand Identity", "Destination Storytelling", "Digital Presence"],
@@ -226,8 +220,11 @@ export const cases: CaseStudy[] = [
     client: "Sea Soul",
     industry: "Travel & Tourism",
     year: "2025 – 2026",
+    location: "Hurghada, Red Sea, Egypt",
     summary: "A local soul for those who travel further.",
-    services: ["signal", "frame"],
+    question:
+      "How do we make a traveler feel like they already have a trusted, insider contact on the ground before they even board their flight?",
+    services: ["frame", "direct"],
     status: "closed",
     featured: true,
     personality: "incline",
@@ -285,7 +282,7 @@ export const cases: CaseStudy[] = [
     industry: "Streetwear",
     year: "2026",
     summary: "A pack mentality, built into a mark — streetwear identity for a brand that doesn't follow the culture.",
-    services: ["signal", "frame"],
+    services: ["frame", "direct"],
     status: "in-progress",
     featured: true,
     personality: "eccentric",
@@ -323,8 +320,10 @@ export const cases: CaseStudy[] = [
     client: "EL DOOH",
     industry: "Furniture",
     year: "2026",
+    location: "Egypt",
     summary: "A third generation, translated for today.",
-    services: ["frame"],
+    question: "How do you carry a legacy forward without living in the past?",
+    services: ["frame", "direct"],
     status: "closed",
     featured: false,
     personality: "casualist",
@@ -345,8 +344,12 @@ export const cases: CaseStudy[] = [
       "El Dooh continues a family workshop built by hand — carrying forward the craft, permanence and care that made it last, while adapting it for a generation that moves between apartments, cities and chapters of life. El Dooh is not a new furniture brand built around heritage. It is a continuation. A granddaughter picking up her grandfather's actual workshop and asking what is worth keeping — and what needs to change. The answer isn't nostalgia. It is craftsmanship that moves. The Client: A third-generation furniture workshop, with pieces from the previous generation still standing in Egyptian homes decades later. The Situation: Furniture used to be built to outlive the people who bought it. Today, people move more — between apartments, cities and chapters of life. The challenge was to carry the durability and craftsmanship of the original workshop into that reality. The Brief: Build a contemporary brand without losing what made the original workshop matter. Keep the craft. Lose the weight. The Question: “How do you carry a legacy forward without living in the past?”",
     observe:
       "We looked at what actually made the legacy valuable: Three generations. One workshop. Furniture that lasts. But the market was divided between heavy ornamental heritage and contemporary furniture with little story behind it. El Dooh had another possibility: a real family history translated through a restrained, contemporary lens. Find: The furniture had already outlived its owners. Grandfather's pieces were still standing in homes across Egypt, holding years of ordinary life — mornings, arguments, weddings, families growing up. The opportunity wasn't to recreate the past. It was to make something that could last into the future. Keywords: Legacy · Craft · Adaptability · Permanence. Contrasts: Past / Present · Heritage / Contemporary · Permanence / Movement · Furniture / Life.",
+    frame:
+      "A Third Generation, Translated for Today. The brand doesn't say: “Things were better before.” It says: Homes change. People change. Good craftsmanship doesn't have to. And that becomes the central shift: From Heritage → To Continuation.",
+    direct:
+      "The brand is built around four pillars. Legacy, Continued: The three-generation story as the spine. Craftsmanship That Moves: Durability adapted for a generation that moves. Furniture as Witness: The product isn't the hero. The life around it is. Quiet Editorial Confidence: A visual and verbal world closer to publishing and archives than traditional furniture showrooms.",
     impact:
-      "Frame — A Third Generation, Translated for Today. The brand doesn't say: “Things were better before.” It says: Homes change. People change. Good craftsmanship doesn't have to. And that becomes the central shift: From Heritage → To Continuation. Direct: The brand is built around four pillars. Legacy, Continued: The three-generation story as the spine. Craftsmanship That Moves: Durability adapted for a generation that moves. Furniture as Witness: The product isn't the hero. The life around it is. Quiet Editorial Confidence: A visual and verbal world closer to publishing and archives than traditional furniture showrooms. Outcome: From Furniture → What Stays. El Dooh becomes a brand about continuing something worth keeping — without freezing it in time. A workshop passed forward. A craft translated. Furniture built for lives that move. From hand to hand, the story remains. And the ambition is simple: to build the piece of furniture an Egyptian family is still living with thirty years from now.",
+      "From Furniture → What Stays. El Dooh becomes a brand about continuing something worth keeping — without freezing it in time. A workshop passed forward. A craft translated. Furniture built for lives that move. From hand to hand, the story remains. And the ambition is simple: to build the piece of furniture an Egyptian family is still living with thirty years from now.",
     quote: {
       text: "From hand to hand, the story remains.",
       author: "EL DOOH",
@@ -364,6 +367,8 @@ export const cases: CaseStudy[] = [
     client: "Gomam Hostel",
     industry: "Hospitality / Hostel",
     year: "2026",
+    location: "Dahab, South Sinai",
+    question: "What if a hostel wasn't somewhere you stayed, but somewhere you became part of?",
     summary: "Gomam is more than a hostel. It is the place between where you came from and where you're going — where travelers pause, connect, and somehow end up staying longer than they planned.",
     services: ["full-frame"],
     status: "closed",
@@ -424,8 +429,12 @@ export const cases: CaseStudy[] = [
       "Gomam is a passion project born from actually living inside the place. The identity wasn't designed from a brief alone. Every decision came from experiencing the hostel — its people, routines, conversations, activities and the relationships that continued long after guests left. What started as a place to stay became something much harder to define: a community people return to. The Client: A soulful hostel in Dahab built around travelers, shared experiences and the feeling of strangers becoming family. The Situation: The hostel was already offering more than a bed. People shared meals. Went hiking. Gathered around bonfires. Listened to live music. Played games. Celebrated birthdays. There was always something happening — and guests could even suggest what came next. The challenge was to make that feeling visible through the brand. The Brief: Create an identity around the real experience of Gomam — not as accommodation, but as a place where travelers connect, belong, and often find themselves coming back. The Question: “What if a hostel wasn't somewhere you stayed, but somewhere you became part of?”",
     observe:
       "The strongest part of Gomam wasn't the room. It was everything happening outside it. Shared meals. Stories. Hikes. Music. Bonfires. Spontaneous plans. People coming back. And eventually, some guests didn't just return as guests. They came back as volunteers. Find: Gomam wasn't creating stays. It was creating belonging. The “in-between” became more than a physical idea. It was the space between strangers and friends, guest and family, arriving and belonging. Keywords: Belonging · Community · Connection · Spontaneity. Contrasts: Stranger / Family · Guest / Local · Arrival / Return · Stay / Belong.",
+    frame:
+      "The In-Between: Gomam is the pause in the journey. The place where you don't know how long you're going to stay — because the experience keeps giving you reasons to stay another night, join another hike, share another meal, meet another person. You arrive as a traveler. You leave knowing you'll come back.",
+    direct:
+      "The identity was built from the experience itself. Not polished hospitality. Not a generic backpacker aesthetic. But the warmth, imperfection and spontaneity of a place where people are the identity. The brand becomes a reflection of the community: People → Stories → Activities → Rituals → Belonging.",
     impact:
-      "Frame — The In-Between: Gomam is the pause in the journey. The place where you don't know how long you're going to stay — because the experience keeps giving you reasons to stay another night, join another hike, share another meal, meet another person. You arrive as a traveler. You leave knowing you'll come back. Direct: The identity was built from the experience itself. Not polished hospitality. Not a generic backpacker aesthetic. But the warmth, imperfection and spontaneity of a place where people are the identity. The brand becomes a reflection of the community: People → Stories → Activities → Rituals → Belonging. Outcome: From Hostel → Community. Gomam becomes positioned around something accommodation alone can't offer: a place you can belong to, even when you're only passing through. The result isn't simply a visual identity for a hostel. It's a brand built around the behaviour already happening there: People arrive. People connect. People leave. People come back. Some even return as part of the place itself.",
+      "From Hostel → Community. Gomam becomes positioned around something accommodation alone can't offer: a place you can belong to, even when you're only passing through. The result isn't simply a visual identity for a hostel. It's a brand built around the behaviour already happening there: People arrive. People connect. People leave. People come back. Some even return as part of the place itself.",
     quote: {
       text: "You'll never know how long you are staying.",
       author: "Gomam Hostel",
@@ -443,6 +452,9 @@ export const cases: CaseStudy[] = [
     client: "TAIDUP",
     industry: "Travel & Experiences",
     year: "2026",
+    location: "Hurghada, Egypt",
+    question:
+      "How do we make the experience feel as elevated and memorable online as it is in real life out on the water?",
     summary: "The Red Sea, your way.",
     services: ["full-frame"],
     status: "in-progress",
@@ -507,7 +519,7 @@ export const cases: CaseStudy[] = [
     },
     metrics: [
       { value: "5", label: "core keywords & pillars" },
-      { value: "6", label: "observation areas read" },
+      { value: "3", label: "observation areas read" },
       { value: "1", label: "curated day, end to end" },
     ],
     tags: [
@@ -523,8 +535,9 @@ export const cases: CaseStudy[] = [
     client: "VELE",
     industry: "Food & Hospitality",
     year: "2026",
+    location: "Dahab, Sinai",
     summary: "The warmth of solitude, in every cup — a coastal coffee shop identity built on lingering moments and heritage.",
-    services: ["signal", "frame"],
+    services: ["frame", "direct"],
     status: "closed",
     featured: false,
     personality: "casualist",
@@ -563,7 +576,7 @@ export const cases: CaseStudy[] = [
     industry: "Real Estate Marketing",
     year: "2024",
     summary: "A mark built from three moves — star, R, forward arrow — for a lead-generation agency that refuses to just look good.",
-    services: ["signal", "frame"],
+    services: ["frame"],
     status: "closed",
     featured: false,
     personality: "eccentric",
@@ -640,13 +653,28 @@ export const team = [
   { name: "Rafael Nunes", role: "Editor & Frame Finisher", note: "Cuts to the bone." },
 ];
 
-export const beliefs = [
-  "Attention is a material. We handle it with the same care as film.",
-  "Perception is never accidental. It is designed.",
-  "The best frame includes what the client means — and excludes what the market is tired of.",
-  "Observation before opinion. Reading before recommendation.",
-  "A still is a decision. A film is a sequence of them.",
-  "The quiet detail is where perception is actually won.",
+export const principles = [
+  {
+    title: "Observe before you act",
+    lead: "Before we create anything, we look.",
+    body: "We question the brief, study the business, listen to people and look for what others might have missed.",
+    note: "Evidence before assumptions.",
+    method: "Research / Listen / Question / Clarify",
+  },
+  {
+    title: "Culture is the context",
+    lead: "No brand exists in isolation.",
+    body: "People, place, language, habits, history and culture shape how something is understood. We don't import ideas blindly.",
+    note: "We build from what is real.",
+    method: "Cultural intelligence / Environmental reading / Human insight",
+  },
+  {
+    title: "Restraint is a creative act",
+    lead: "More is not always more.",
+    body: "We remove what doesn't belong, refine what does, and give the important things room to speak.",
+    note: "Direction over decoration.",
+    method: "Edit / Remove / Refine / Reveal",
+  },
 ];
 
 export const values = [
@@ -672,7 +700,7 @@ export const traits = [
     detail: "You keep your hands steady on set and your sentences short in the edit.",
   },
   {
-    title: "Passionate",
+    title: "Restless",
     detail: "You care about the frame nobody will notice — because you will notice it.",
   },
 ];

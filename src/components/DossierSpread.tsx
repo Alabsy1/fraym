@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, type CSSProperties, type ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { serviceBySlug } from "@/lib/data";
 import { solid, textOn, softBorder, textColor } from "@/lib/color";
@@ -19,7 +19,7 @@ const slugByTab: Record<TabId, string> = {
 const noteLine: Record<TabId, string> = {
   frame: "the frame is a decision. make it deliberate.",
   direct: "directed on paper. rehearsed on set.",
-  signal: "read the room twice. act once.",
+  signal: "keep the story moving.",
   full: "one file. one voice. one standard.",
 };
 
@@ -319,21 +319,21 @@ export function DossierSpread({
                         {service.position}
                       </p>
 
-                      <Label className="mt-7">Client Metrics</Label>
+                      <Label className="mt-7">Scope</Label>
                       <div className="mt-3 grid flex-1 grid-cols-3 gap-3">
-                        {service.metrics.map((m) => (
+                        {service.deliverables.slice(0, 3).map((d, i) => (
                           <div
-                            key={m.label}
+                            key={d}
                             className={cn(
                               "flex flex-col justify-between gap-2 border bg-paper p-3",
                               softBorder(c)
                             )}
                           >
                             <p className="font-display text-xl font-semibold leading-none text-ink sm:text-2xl">
-                              <MetricCounter value={m.value} active={active} />
+                              {String(i + 1).padStart(2, "0")}
                             </p>
                             <p className="mono-label text-[0.55rem] leading-snug text-ink-soft">
-                              {m.label}
+                              {d}
                             </p>
                           </div>
                         ))}
@@ -491,38 +491,4 @@ function Holes({ side }: { side: "left" | "right" }) {
       ))}
     </span>
   );
-}
-
-function MetricCounter({
-  value,
-  active,
-}: {
-  value: string;
-  active: TabId;
-}) {
-  const reduced = useReducedMotion();
-  const [display, setDisplay] = useState(value);
-  const parsed = useMemo(() => value.match(/^([+\-]?)(\d+(?:\.\d+)?)(.*)$/), [value]);
-  const enabled = active === "full" && !reduced && parsed != null;
-
-  useEffect(() => {
-    if (!enabled || !parsed) return;
-    const sign = parsed[1] ?? "";
-    const target = parseFloat(parsed[2]);
-    const suffix = parsed[3] ?? "";
-    const decimals = parsed[2].includes(".") ? 1 : 0;
-    let raf = 0;
-    const start = performance.now();
-    const duration = 900;
-    const tick = (now: number) => {
-      const p = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - p, 3);
-      setDisplay(`${sign}${(target * eased).toFixed(decimals)}${suffix}`);
-      if (p < 1) raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [enabled, parsed]);
-
-  return <>{display}</>;
 }

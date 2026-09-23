@@ -12,11 +12,11 @@ interface TabContent {
   id: TabId;
   label: string;
   ref: string;
-  clientType: string;
-  industry: string;
+  client: string;
+  field: string;
   location: string;
-  date: string;
   status: string;
+  caseType: string;
 }
 
 const tabs: TabContent[] = [
@@ -24,41 +24,41 @@ const tabs: TabContent[] = [
     id: "frame",
     label: "FRAME",
     ref: "FR-001",
-    clientType: "Hospitality / Lifestyle",
-    industry: "Experience Driven",
-    location: "Global",
-    date: "May 24, 2025",
+    client: "Confidential",
+    field: "Hospitality / Lifestyle",
+    location: "El Gouna",
     status: "Open",
+    caseType: "Full Frame",
   },
   {
     id: "direct",
     label: "DIRECT",
     ref: "DR-002",
-    clientType: "Brand Motion",
-    industry: "Production",
-    location: "On-Set",
-    date: "Mar 15, 2025",
+    client: "Confidential",
+    field: "Creative Direction / Campaigns",
+    location: "Red Sea",
     status: "Active",
+    caseType: "Direct",
   },
   {
     id: "signal",
     label: "SIGNAL",
     ref: "SG-003",
-    clientType: "Perception Audit",
-    industry: "Strategy",
-    location: "Worldwide",
-    date: "Jan 22, 2025",
+    client: "Confidential",
+    field: "Content / Social / Media",
+    location: "Red Sea",
     status: "Open",
+    caseType: "Signal",
   },
   {
     id: "full",
     label: "FULL",
     ref: "FF-004",
-    clientType: "Full Case",
-    industry: "Creative",
-    location: "Copenhagen",
-    date: "Jun 10, 2025",
+    client: "Confidential",
+    field: "Ecosystem / Growth",
+    location: "Red Sea",
     status: "Active",
+    caseType: "Full Frame",
   },
 ];
 
@@ -73,10 +73,10 @@ interface FolderTab {
 
 const folderTabs: FolderTab[] = [
   { id: "open", label: "OPEN FILE", slug: "", color: "#c8a84e", activeColor: "#b89838", textColor: "#1f1c16" },
-  { id: "evidence", label: "EVIDENCE", slug: "frame", color: "#d4c4a8", activeColor: "#c4b498", textColor: "#1f1c16" },
-  { id: "observation", label: "OBSERVATION", slug: "signal", color: "#7a9ab0", activeColor: "#6a8aa0", textColor: "#fff" },
-  { id: "execution", label: "EXECUTION", slug: "direct", color: "#c4604a", activeColor: "#b45040", textColor: "#fff" },
-  { id: "results", label: "RESULTS", slug: "full-frame", color: "#8a9a6a", activeColor: "#7a8a5a", textColor: "#fff" },
+  { id: "evidence", label: "FRAME", slug: "frame", color: "#d4c4a8", activeColor: "#c4b498", textColor: "#1f1c16" },
+  { id: "observation", label: "SIGNAL", slug: "signal", color: "#7a9ab0", activeColor: "#6a8aa0", textColor: "#fff" },
+  { id: "execution", label: "DIRECT", slug: "direct", color: "#c4604a", activeColor: "#b45040", textColor: "#fff" },
+  { id: "results", label: "FULL FRAME", slug: "full-frame", color: "#8a9a6a", activeColor: "#7a8a5a", textColor: "#fff" },
 ];
 
 const slugToTabId: Record<string, TabId> = {
@@ -186,11 +186,11 @@ export function HeroCaseFile({
 
           {/* Metadata fields */}
           <div className="mt-5 flex-1 space-y-4">
-            <Field label="CLIENT TYPE" value={tab.clientType} />
-            <Field label="INDUSTRY" value={tab.industry} />
+            <Field label="CLIENT" value={tab.client} />
+            <Field label="FIELD" value={tab.field} />
             <Field label="LOCATION" value={tab.location} />
-            <Field label="DATE" value={tab.date} />
             <Field label="STATUS" value={tab.status} highlight />
+            <Field label="CASE TYPE" value={tab.caseType} />
           </div>
 
           {/* Bottom: Globe + CONFIDENTIAL */}

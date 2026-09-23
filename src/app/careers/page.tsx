@@ -32,16 +32,19 @@ export default function CareersPage() {
           </Reveal>
           <Reveal delay={80}>
             <h1 className="mt-6 max-w-4xl font-display text-4xl font-semibold leading-[1.05] tracking-tight text-ink sm:text-6xl">
-              We&apos;re building a studio for{" "}
-              <span className="text-ink-soft">curious minds and clear eyes.</span>
+              We&apos;re looking for people{" "}
+              <span className="text-ink-soft">who look closer.</span>
             </h1>
           </Reveal>
           <Reveal delay={160}>
             <p className="mt-6 max-w-xl text-base leading-relaxed text-ink-soft md:text-lg">
-              We don&apos;t hire for titles. We hire for temperament — people who
-              read the room, argue kindly, and care about the frame nobody will
-              notice. If that sounds like you, read the four traits, then send
-              us a note.
+              Curious enough to question.
+              <br />
+              Thoughtful enough to listen.
+              <br />
+              Structured enough to build.
+              <br />
+              Brave enough to challenge the obvious.
             </p>
           </Reveal>
         </div>

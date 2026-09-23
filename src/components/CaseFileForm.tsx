@@ -105,7 +105,7 @@ export function CaseFileForm({ compact = false }: { compact?: boolean }) {
 
       <div className="mb-8 flex flex-wrap items-start justify-between gap-4 border-b border-ink/10 pb-6">
         <div>
-          <p className="mono-label text-ink-soft">CASE FILE Nº</p>
+          <p className="mono-label text-ink-soft">CASE NUMBER</p>
           <p className="mt-1 font-mono text-2xl font-bold tracking-tight text-ink">
             {caseNumber}
           </p>
@@ -114,14 +114,14 @@ export function CaseFileForm({ compact = false }: { compact?: boolean }) {
           <Stamp text="Priority: Investigate" tone="signal" rotation={4} />
           <span className="mono-label flex items-center gap-2 text-moss">
             <span className="size-2 animate-pulse-dot rounded-full bg-signal" />
-            intake open
+            status: open
           </span>
         </div>
       </div>
 
       {sent ? (
         <div className="py-10 text-center">
-          <AnimatedStamp text="Received" tone="tape" rotation={-6} className="mb-6" />
+          <AnimatedStamp text="Case opened" tone="tape" rotation={-6} className="mb-6" />
           <h3 className="font-display text-3xl font-semibold text-ink">
             The case is open.
           </h3>
@@ -317,7 +317,7 @@ export function CaseFileForm({ compact = false }: { compact?: boolean }) {
               type="submit"
               className="mono-label group inline-flex items-center gap-2 bg-signal px-6 py-3.5 text-xs font-bold text-white transition-colors hover:bg-signal-deep"
             >
-              Open the case
+              Open a case
               <svg
                 aria-hidden
                 className="size-3 transition-transform group-hover:translate-x-1"

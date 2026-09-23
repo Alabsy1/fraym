@@ -11,7 +11,7 @@ export function SectionTitle({
 }: {
   eyebrow?: string;
   title: ReactNode;
-  description?: string;
+  description?: ReactNode;
   align?: "left" | "center";
   className?: string;
   action?: ReactNode;

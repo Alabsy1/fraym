@@ -82,13 +82,14 @@ export default async function ServicePage({ params }: Props) {
       <section className="border-b border-ink/10">
         <div className="mx-auto grid max-w-7xl gap-12 px-4 py-20 sm:px-6 lg:grid-cols-[1fr_1.2fr] lg:px-8">
           <Reveal>
-            <SectionLabel label="The Position" />
+            <SectionLabel label="01 · The problem this system solves" />
             <p className="mt-4 max-w-md text-lg leading-relaxed text-ink-soft">
-              {service.position}
+              {service.problem}
             </p>
           </Reveal>
           <Reveal delay={120}>
-            <p className="max-w-2xl text-xl leading-relaxed text-ink md:text-2xl">
+            <SectionLabel label="02 · What FRAYM investigates" />
+            <p className="mt-4 max-w-2xl text-xl leading-relaxed text-ink md:text-2xl">
               {service.description}
             </p>
           </Reveal>
@@ -106,7 +107,7 @@ export default async function ServicePage({ params }: Props) {
                   rotation={-3}
                   className="absolute -top-3 left-8"
                 />
-                <SectionLabel label="Deliverables" />
+                <SectionLabel label="03 · What we build / deliver" />
                 <ul className="mt-6 space-y-3">
                   {service.deliverables.map((d, i) => (
                     <li
@@ -126,7 +127,7 @@ export default async function ServicePage({ params }: Props) {
             <Reveal delay={120}>
               <SystemWindow title={`PROCESS_${service.slug.toUpperCase()}.txt`}>
                 <div className="p-6 sm:p-8">
-                  <SectionLabel label="The Process" />
+                  <SectionLabel label="04 · How we work" />
                   <ol className="mt-6 space-y-6">
                     {service.process.map((step, i) => (
                       <li key={step.step} className="flex gap-4">
@@ -161,16 +162,18 @@ export default async function ServicePage({ params }: Props) {
                   the {service.short.toLowerCase()} is a decision. make it deliberate.
                 </p>
               </StickyNote>
-              <CtaLink href="/contact">Open a case on the {service.short.toLowerCase()}</CtaLink>
+              <CtaLink href="/contact">Open a Case</CtaLink>
             </div>
           </Reveal>
         </div>
       </section>
 
       {/* ── Related cases ────────────────────────────────────── */}
+      {related.length > 0 && (
       <section className="border-t border-ink/10">
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-          <div className="flex items-end justify-between gap-6">
+          <SectionLabel label="05 · Relevant evidence" />
+          <div className="mt-4 flex items-end justify-between gap-6">
             <h2 className="font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
               {service.system} <span className="text-ink-soft">in the field</span>
             </h2>
@@ -187,6 +190,7 @@ export default async function ServicePage({ params }: Props) {
           </div>
         </div>
       </section>
+      )}
     </div>
   );
 }

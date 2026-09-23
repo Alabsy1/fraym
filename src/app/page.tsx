@@ -32,14 +32,23 @@ export default function HomePage() {
                 eyebrow="Same Brand, Different Frame"
                 title={
                   <>
-                    The painting was always there.{" "}
+                    Same brand.{" "}
                     <span className="text-ink-soft">
-                      We just learned{" "}
-                      <CircleHighlight>where to stand.</CircleHighlight>
+                      Different{" "}
+                      <CircleHighlight>perception.</CircleHighlight>
                     </span>
                   </>
                 }
-                description="A photograph is a painting with the edges still visible. Drag the handle. The same subject, the same light — one frame raw, one frame decided. That difference, applied consistently, is what a brand feels like."
+                description={
+                  <>
+                    Context changes everything.
+                    <br />
+                    <br />
+                    The same place can feel ordinary or unforgettable. The same
+                    product can feel expected or essential. The same story can
+                    disappear or become impossible to ignore.
+                  </>
+                }
               />
               <div className="mt-6 flex flex-wrap gap-4">
                 <CtaLink href="/services" tone="ink">
@@ -51,7 +60,7 @@ export default function HomePage() {
               </div>
               <div className="mt-8 flex items-center gap-3">
                 <span className="hand text-2xl text-ink-soft">
-                  drag the divider — see the difference
+                  we shape perception
                 </span>
               </div>
             </div>
@@ -71,8 +80,17 @@ export default function HomePage() {
               eyebrow="Our Systems"
               title={
                 <>
-                  Four systems. One method:{" "}
-                  <span className="text-ink-soft">observe, direct, frame.</span>
+                  Four systems.{" "}
+                  <span className="text-ink-soft">One purpose.</span>
+                </>
+              }
+              description={
+                <>
+                  Find what matters.
+                  <br />
+                  Give it direction.
+                  <br />
+                  Make it real.
                 </>
               }
             />
@@ -102,13 +120,14 @@ export default function HomePage() {
               eyebrow="Featured Cases"
               title={
                 <>
-                  Closed cases, open for{" "}
-                  <span className="text-ink-soft">inspection.</span>
+                  Real cases. Real questions.{" "}
+                  <span className="text-ink-soft">Real solutions.</span>
                 </>
               }
+              description="We don't create from assumptions. We investigate the problem, find the opportunity, and build the frame around it."
             />
             <CtaLink href="/cases" variant="outline" tone="ink" className="shrink-0">
-              <InkUnderline>All case files</InkUnderline>
+              <InkUnderline>View all cases</InkUnderline>
             </CtaLink>
           </div>
 

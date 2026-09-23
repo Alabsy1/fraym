@@ -7,13 +7,14 @@ import { Tape } from "@/components/ui/Tape";
 import { Stamp } from "@/components/ui/Stamp";
 import { CtaLink } from "@/components/ui/CtaLink";
 import { VerbTriad } from "@/components/ui/VerbTriad";
-import { beliefs, team, values, industries } from "@/lib/data";
+import { SystemWindow } from "@/components/ui/SystemWindow";
+import { principles, team, values, industries } from "@/lib/data";
 import { cn } from "@/lib/cn";
 
 export const metadata: Metadata = {
   title: "About",
   description:
-    "FRAYM is not an agency. We are an observation studio — a collective of observers, thinkers and makers.",
+    "We are FRAYM — a creative + business solutions studio. We investigate brands, businesses and experiences, then frame the opportunity, direct the idea and make it real.",
 };
 
 export default function AboutPage() {
@@ -26,30 +27,27 @@ export default function AboutPage() {
           <Reveal>
             <p className="mono-label mb-6 flex items-center gap-3 text-ink-soft">
               <span className="inline-block h-px w-10 bg-ink/30" />
-              About · The Manifesto
+              About · We Are FRAYM
             </p>
           </Reveal>
           <Reveal delay={80}>
             <h1 className="max-w-5xl font-display text-4xl font-semibold leading-[1.05] tracking-tight text-ink sm:text-6xl lg:text-7xl">
-              We are not an agency.{" "}
+              We are FRAYM.{" "}
               <span className="text-ink-soft">
-                We are an observation studio.
+                A creative + business solutions studio.
               </span>
             </h1>
           </Reveal>
           <Reveal delay={160}>
             <div className="mt-10 grid max-w-4xl gap-8 md:grid-cols-2">
               <p className="text-lg leading-relaxed text-ink-soft">
-                An agency delivers what you asked for. A studio asks what you
-                actually meant. We exist in the second category — watching the
-                room, reading the market, and only then touching a camera, a
-                script or a layout.
+                We investigate brands, businesses and experiences to understand
+                what they are, what they could become, and what is standing in
+                the way.
               </p>
               <p className="text-lg leading-relaxed text-ink-soft">
-                The verb triad isn&apos;t a slogan. It&apos;s the sequence every
-                case runs: observe the room, direct the scene, frame the
-                decision. Nothing is accidental here — not the light, not the
-                silence, not the frame.
+                Then we frame the opportunity, direct the idea, and make it
+                real.
               </p>
             </div>
           </Reveal>
@@ -61,32 +59,138 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ── Belief list ──────────────────────────────────────── */}
+      {/* ── Look closer · the observation room ──────────────── */}
       <section className="bg-paper-2">
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-          <SectionTitle
-            eyebrow="What we believe"
-            title={
-              <>
-                Perception is never accidental.{" "}
-                <span className="text-ink-soft">It is designed.</span>
-              </>
-            }
-          />
-          <div className="mt-12 grid gap-4 md:grid-cols-2">
-            {beliefs.map((belief, i) => (
-              <Reveal key={belief} delay={i * 60}>
-                <div className="flex h-full items-start gap-4 border border-ink/15 bg-paper p-6">
-                  <span className="mono-label mt-1 text-ink-faint">
+          <div className="grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:items-center">
+            <SectionTitle
+              eyebrow="Look Closer"
+              title={
+                <>
+                  The obvious is rarely{" "}
+                  <span className="text-ink-soft">the whole story.</span>
+                </>
+              }
+            />
+            <Reveal delay={100}>
+              <SystemWindow title="OBSERVATION_ROOM.txt">
+                <div className="space-y-4 p-6 sm:p-8">
+                  <p className="text-lg leading-relaxed text-ink">
+                    We look at the details, the context, the culture, the
+                    people and the business behind the brief.
+                  </p>
+                  <p className="hand text-2xl leading-snug text-ink-soft">
+                    Because before we make something, we need to understand
+                    what we&apos;re looking at.
+                  </p>
+                </div>
+              </SystemWindow>
+            </Reveal>
+          </div>
+
+          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              { verb: "We observe.", line: "We collect evidence." },
+              { verb: "We direct.", line: "We give it direction." },
+              { verb: "We frame.", line: "We decide how it should be seen." },
+              { verb: "We make.", line: "We turn the idea into something real." },
+            ].map((item, i) => (
+              <Reveal key={item.verb} delay={i * 60}>
+                <div className="flex h-full flex-col gap-3 border border-ink/15 bg-paper p-6">
+                  <span className="mono-label text-ink-faint">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <p className="font-display text-xl font-medium leading-snug text-ink">
-                    {belief}
+                  <p className="font-display text-2xl font-semibold uppercase leading-tight text-ink">
+                    {item.verb}
+                  </p>
+                  <p className="text-sm leading-relaxed text-ink-soft">
+                    {item.line}
                   </p>
                 </div>
               </Reveal>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ── Principles ───────────────────────────────────────── */}
+      <section className="border-t border-ink/10">
+        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+          <SectionTitle
+            eyebrow="Philosophy · Principles"
+            title={
+              <>
+                Look closer.{" "}
+                <span className="text-ink-soft">Find what matters.</span>
+              </>
+            }
+          />
+          <div className="mt-12 grid gap-4 md:grid-cols-3">
+            {principles.map((p, i) => (
+              <Reveal key={p.title} delay={i * 60}>
+                <div className="flex h-full flex-col gap-3 border border-ink/15 bg-paper p-6">
+                  <span className="mono-label text-ink-faint">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="font-display text-xl font-semibold uppercase leading-snug text-ink">
+                    {p.title}
+                  </h3>
+                  <p className="font-display text-lg font-medium leading-snug text-ink">
+                    {p.lead}
+                  </p>
+                  <p className="text-sm leading-relaxed text-ink-soft">
+                    {p.body}
+                  </p>
+                  <p className="hand text-2xl text-ink-soft">{p.note}</p>
+                  <p className="mono-label mt-auto border-t border-ink/10 pt-3 text-[0.6rem] text-ink-faint">
+                    Method: {p.method}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Manifesto ────────────────────────────────────────── */}
+      <section className="border-t border-ink/10 bg-paper-2">
+        <div className="mx-auto max-w-3xl px-4 py-20 text-center sm:px-6 lg:px-8">
+          <Reveal>
+            <p className="mono-label flex items-center justify-center gap-2 text-ink-soft">
+              <span className="inline-block h-px w-8 bg-ink/30" />
+              Manifesto
+            </p>
+            <h2 className="mt-4 font-display text-3xl font-semibold leading-tight tracking-tight text-ink sm:text-4xl md:text-5xl">
+              We don&apos;t start with the answer.
+            </h2>
+            <p className="mt-8 font-display text-xl font-medium leading-relaxed text-ink">
+              We start with a question.
+            </p>
+            <p className="mt-6 text-lg leading-relaxed text-ink-soft">
+              We look closer.
+              <br />
+              We collect evidence.
+              <br />
+              We challenge assumptions.
+              <br />
+              We understand the context.
+              <br />
+              We find the tension.
+              <br />
+              We find the opportunity.
+            </p>
+            <p className="mt-6 font-display text-xl font-medium leading-relaxed text-ink">
+              Then we frame it.
+              <br />
+              We give it direction.
+              <br />
+              And we make it real.
+            </p>
+            <p className="hand mt-8 text-2xl leading-snug text-ink-soft">
+              Because the right idea isn&apos;t always missing. Sometimes it
+              just hasn&apos;t been seen from the right angle.
+            </p>
+          </Reveal>
         </div>
       </section>
 
@@ -109,14 +213,16 @@ export default function AboutPage() {
 
           <div className="texture-paper-2 relative mx-auto max-w-5xl border border-ink/15 p-6 shadow-window sm:p-12">
             <Tape color="var(--color-tape)" rotation={-2} className="absolute -top-3 left-1/2 -translate-x-1/2" />
-            <div className="grid grid-cols-2 gap-6 md:grid-cols-3">
+            <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
               {[
-                { text: "the brief is never the brief.", tone: "frame" as const, rot: -3 },
-                { text: "read the room twice.", tone: "tape" as const, rot: 2 },
-                { text: "rehearse the accident.", tone: "moss" as const, rot: -2 },
-                { text: "the frame is the decision.", tone: "frame" as const, rot: 4 },
-                { text: "quiet details win.", tone: "moss" as const, rot: -4 },
-                { text: "perception. is. designed.", tone: "tape" as const, rot: 1 },
+                { text: "a brand is not only built. it is revealed.", tone: "frame" as const, rot: -3 },
+                { text: "direction over decoration.", tone: "tape" as const, rot: 2 },
+                { text: "culture is the context.", tone: "moss" as const, rot: -2 },
+                { text: "restraint is a creative act.", tone: "frame" as const, rot: 4 },
+                { text: "observe before you act.", tone: "moss" as const, rot: -4 },
+                { text: "evidence before assumptions.", tone: "tape" as const, rot: 1 },
+                { text: "the frame changes what people see.", tone: "frame" as const, rot: -2 },
+                { text: "what is overlooked can become the opportunity.", tone: "moss" as const, rot: 3 },
               ].map((note, i) => (
                 <StickyNote
                   key={note.text}
@@ -134,7 +240,7 @@ export default function AboutPage() {
               ))}
             </div>
             <p className="mono-label mt-10 text-center text-ink-soft">
-              pin #001 → pin #006 · replace only when a better truth shows up
+              pin #001 → pin #008 · replace only when a better truth shows up
             </p>
           </div>
         </div>
@@ -234,9 +340,9 @@ export default function AboutPage() {
                 <Stamp text="No genre bias" tone="moss" rotation={3} className="ml-2" />
               </div>
               <p className="mt-8 max-w-md text-sm leading-relaxed text-ink-soft">
-                Perception behaves the same way in every industry: people decide
-                in seconds, based on frames. Our method is industry-agnostic
-                because observation is.
+                Every industry has its own context — its people, habits and
+                culture. Our method is industry-agnostic because observation
+                is.
               </p>
             </div>
           </div>

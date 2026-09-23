@@ -6,6 +6,7 @@ import { Stamp } from "@/components/ui/Stamp";
 import { CasesExplorer } from "@/components/CasesExplorer";
 import { LogoMarquee } from "@/components/LogoMarquee";
 import { BtsReel } from "@/components/BtsReel";
+import { EvidenceBoard } from "@/components/EvidenceBoard";
 import { CtaLink } from "@/components/ui/CtaLink";
 
 export const metadata: Metadata = {
@@ -27,30 +28,44 @@ export default function CasesPage() {
                 <span className="inline-block h-px w-10 bg-ink/30" />
                 Cases · The File Cabinet
               </p>
-              <Stamp text="Filterable" tone="tape" rotation={3} />
+              <Stamp text="Evidence collected" tone="tape" rotation={3} />
             </div>
           </Reveal>
           <Reveal delay={80}>
             <h1 className="mt-6 max-w-4xl font-display text-5xl font-semibold leading-[1.02] tracking-tight text-ink sm:text-7xl">
-              The case files,
+              Real cases.
               <br />
-              <span className="text-ink-soft">open for inspection.</span>
+              Real context.
+              <br />
+              <span className="text-ink-soft">Real solutions.</span>
             </h1>
           </Reveal>
           <Reveal delay={160}>
             <p className="mt-6 max-w-xl text-base leading-relaxed text-ink-soft md:text-lg">
-              Every closed case is filed with its brief, its observations and
-              its impact. In-progress cases are filed as they run. Filter by
-              industry, flip between grid and list — every file is read.
+              We don&apos;t just create. We investigate, understand and build
+              solutions that move brands and businesses forward.
+              <br />
+              Here is the evidence.
             </p>
+          </Reveal>
+          <Reveal delay={220}>
+            <div className="mt-8 flex flex-wrap gap-4">
+              <CtaLink href="#cases">Browse Cases</CtaLink>
+              <CtaLink href="#cases" variant="outline" tone="ink">
+                Filter Cases
+              </CtaLink>
+            </div>
           </Reveal>
         </div>
       </section>
 
       {/* ── Explorer ─────────────────────────────────────────── */}
-      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+      <section id="cases" className="mx-auto max-w-7xl scroll-mt-20 px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
         <CasesExplorer />
       </section>
+
+      {/* ── Evidence / Process ───────────────────────────────── */}
+      <EvidenceBoard />
 
       {/* ── Logo Marquee ─────────────────────────────────────── */}
       <LogoMarquee />

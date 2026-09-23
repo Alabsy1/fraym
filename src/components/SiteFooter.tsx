@@ -22,13 +22,11 @@ export function SiteFooter() {
         <Marquee slow>
           {Array.from({ length: 6 }).map((_, i) => (
             <span key={i} className="mono-label mx-6 flex items-center gap-6">
-              OBSERVATION STUDIO
+              LOOK CLOSER
               <span aria-hidden>✳</span>
-              WE OBSERVE
+              FIND WHAT MATTERS
               <span aria-hidden>✳</span>
-              WE DIRECT
-              <span aria-hidden>✳</span>
-              WE FRAME
+              FRAME IT DIFFERENTLY
               <span aria-hidden>✳</span>
             </span>
           ))}
@@ -40,9 +38,9 @@ export function SiteFooter() {
           <div>
             <VerbTriad size="compact" />
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-ink-soft">
-              FRAYM is a perception studio. We observe rooms, direct scenes and
-              frame decisions — so that what people perceive is what you
-              intended.
+              FRAYM is a creative + business solutions studio. We investigate
+              what brands, businesses and experiences need, then use strategy,
+              creative direction and production to move them forward.
             </p>
             <div className="mt-6">
               <CtaLink href="/contact">Open a Case</CtaLink>
@@ -139,8 +137,8 @@ export function SiteFooter() {
         <div className="mt-14 flex flex-col items-start justify-between gap-6 border-t border-ink/10 pt-6 sm:flex-row sm:items-center">
           <Wordmark />
           <p className="mono-label text-ink-soft">
-            © {new Date().getFullYear()} FRAYM — A Perception Studio. Perception
-            is never accidental.
+            © {new Date().getFullYear()} FRAYM — A Creative + Business
+            Solutions Studio. We observe. We direct. We frame.
           </p>
         </div>
       </div>

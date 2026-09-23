@@ -49,7 +49,7 @@ const noteLine = (slug: Service["slug"]): string => {
     case "direct":
       return "directed on paper. rehearsed on set.";
     case "signal":
-      return "read the room twice. act once.";
+      return "keep the story moving.";
     case "full-frame":
       return "one file. one voice. one standard.";
     default:

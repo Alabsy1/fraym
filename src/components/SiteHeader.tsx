@@ -126,7 +126,7 @@ export function SiteHeader() {
               </Link>
             ))}
             <p className="mono-label mt-4 text-ink-soft">
-              A Perception Studio — we observe, we direct, we frame.
+              A Creative + Business Solutions Studio — we observe, we direct, we frame.
             </p>
           </nav>
         </div>
