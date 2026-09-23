@@ -14,6 +14,7 @@ import { GridBackdrop } from "@/components/ui/GridBackdrop";
 import { CtaLink } from "@/components/ui/CtaLink";
 import { Reveal } from "@/components/ui/Reveal";
 import { CaseGallery } from "@/components/CaseGallery";
+import { CaseReel } from "@/components/CaseReel";
 import { cn } from "@/lib/cn";
 
 interface Props {
@@ -119,6 +120,11 @@ export default async function CasePage({ params }: Props) {
       {/* ── Gallery ────────────────────────────────────────── */}
       {item.galleryImages && item.galleryImages.length > 0 && (
         <CaseGallery images={item.galleryImages} />
+      )}
+
+      {/* ── Reel ───────────────────────────────────────────── */}
+      {item.videos && item.videos.length > 0 && (
+        <CaseReel videos={item.videos} />
       )}
 
       {/* ── Tabs ─────────────────────────────────────────────── */}
