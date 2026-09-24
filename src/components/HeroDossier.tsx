@@ -129,7 +129,7 @@ export function HeroDossier() {
       <GridBackdrop />
       <div className="relative mx-auto max-w-[90rem] px-4 pb-20 pt-14 sm:px-6 lg:px-10 lg:pb-28 lg:pt-24">
         {/* ── headline + composite center/right composition ── */}
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,0.30fr)_minmax(0,0.70fr)] lg:items-start lg:gap-4">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,0.30fr)_minmax(0,0.70fr)] lg:items-start lg:gap-6">
           {/* ── LEFT: editorial headline ── */}
           <div className="min-w-0 pr-4">
             <Reveal>
@@ -226,8 +226,8 @@ export function HeroDossier() {
             </Reveal>
 
             {/* case file — full natural width, overlapping photo right edge */}
-            <Reveal delay={200} className="relative z-20 lg:absolute lg:right-0 lg:top-0 lg:h-full lg:w-[48%]">
-              <div ref={cardRef} className="h-full">
+            <Reveal delay={200} className="relative z-20 mt-8 lg:absolute lg:right-0 lg:top-0 lg:mt-0 lg:w-[48%]">
+              <div ref={cardRef}>
                 <HeroCaseFile active={active} onSelect={handleSelect} />
               </div>
             </Reveal>

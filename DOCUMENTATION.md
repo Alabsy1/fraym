@@ -364,10 +364,11 @@ RootLayout (src/app/layout.tsx)
 
 The main hero orchestrator. Client component.
 
-- **Layout:** 2-column grid — left (30% headline) + right (70% composite)
+- **Layout:** Responsive grid — single column on mobile/tablet, 2-column on `lg+` (left 30% headline + right 70% composite)
 - **Container:** `max-w-[90rem]` (1440px)
-- **Left column:** "CASE FILE" eyebrow, "FR-009" in signal red, "WE OBSERVE. WE DIRECT. WE FRAME." with SVG circled "WE FRAME.", body text, scroll indicator
-- **Right column:** Composite of `HeroEvidenceBoard` (55% width photo) + `HeroCaseFile` (absolutely positioned, 48% width, overlaps photo)
+- **Mobile stack order:** Headline → evidence board (55% width, left) → case file (full width, `mt-8` spacing) on mobile/tablet
+- **Left column:** "CASE OPENED" eyebrow, "FR-001" in signal red, "WE OBSERVE. WE DIRECT. WE FRAME." with SVG circled "WE FRAME.", body text, CTAs, scroll indicator
+- **Right column:** Composite of `HeroEvidenceBoard` (55% width photo) + `HeroCaseFile` (absolute on `lg+`, 48% width, overlaps photo). Case file uses natural height (no forced height) to avoid clipping at narrow desktop widths.
 - **Overlay morph:** Origin-driven cinematic expansion from card to fullscreen using Framer Motion `animate()` with spring physics (`stiffness: 380, damping: 28`)
 - **Flash effect:** Radial aperture flash from click point using `radial-gradient`
 - **Light sweep:** Projector light sweep across expanding container
@@ -376,13 +377,13 @@ The main hero orchestrator. Client component.
 
 The interactive case file with tabbed content. Client component.
 
-- **Background:** `layer1.png` (manila folder) with `bg-[#EFECE6]` on Reveal wrapper
-- **Content:** Client type, industry, location, date, status fields on manila background
-- **5 Tabs:** frame, direct, signal, full (client type), portfolio (opens dossier overlay)
+- **Background:** `layer1.png` (manila folder)
+- **Content:** Client, field, location, status, case type fields on manila background
+- **5 Tabs:** OPEN FILE (opens dossier overlay), FRAME, SIGNAL, DIRECT, FULL FRAME
 - **Tab content:** Each shows service-specific metadata and CONFIDENTIAL stamp
 - **Globe SVG:** Animated globe decoration
-- **Barcode:** Decorative barcode at bottom
-- **Positioning:** `lg:absolute lg:right-0 lg:top-0 lg:h-full lg:w-[48%]`
+- **Barcode:** Decorative barcode at bottom (in card content metadata)
+- **Positioning:** On `lg+` — `lg:absolute lg:right-0 lg:top-0 lg:w-[48%]` (natural height, overlaps photo); on mobile/tablet — in-flow full-width card with `mt-8` separation from the evidence board
 
 #### `HeroEvidenceBoard.tsx` (147 lines)
 
