@@ -287,7 +287,7 @@ export const cases: CaseStudy[] = [
     featured: true,
     personality: "eccentric",
     accent: "signal",
-    coverImage: "/ruff/ChatGPT Image Mar 11, 2026 at 01_44_10 AM.png",
+    coverImage: "/ruff/logoruff.png",
     galleryImages: [
       { src: "/ruff/ChatGPT Image Mar 11, 2026 at 01_44_10 AM.png", caption: "RUFF_001 — lookbook, apparel on body" },
       { src: "/ruff/1016F5F8-C91D-4332-A568-09138A5A4B3B.PNG", caption: "RUFF_002 — brand guidelines, v1" },
@@ -375,7 +375,7 @@ export const cases: CaseStudy[] = [
     featured: false,
     personality: "incline",
     accent: "moss",
-    coverImage: "/gomam/hero-gomam.png",
+    coverImage: "/gomam/logoo.png",
     galleryImages: [
       { src: "/gomam/hero-gomam.png", caption: "GOMAM_001 — logo" },
       { src: "/gomam/Artboard 10.png", caption: "GOMAM_002 — arabic & english wordmark" },
@@ -461,7 +461,7 @@ export const cases: CaseStudy[] = [
     featured: false,
     personality: "eccentric",
     accent: "plum",
-    coverImage: "/taidup/hero-tidup.png",
+    coverImage: "/taidup/logo.jpeg",
     galleryImages: [
       { src: "/taidup/hero-tidup.png", caption: "TAIDUP_001 — brand system" },
       { src: "/taidup/26FBF85C-70B0-4FFB-993A-9ADFA5B2D5B6.PNG", caption: "TAIDUP_002 — your perfect day at sea starts here" },
@@ -542,7 +542,7 @@ export const cases: CaseStudy[] = [
     featured: false,
     personality: "casualist",
     accent: "terracotta",
-    coverImage: "/vele/ChatGPT Image Jun 16, 2026, 01_45_37 AM.png",
+    coverImage: "/vele/logov.png",
     galleryImages: [
       { src: "/vele/ChatGPT Image Jun 16, 2026, 01_45_37 AM.png", caption: "VELE_001 — packaging & applications" },
       { src: "/vele/a098f6aa-66cc-4520-9ae8-676cff1f4f37.png", caption: "VELE_002 — brand board & mascot" },
@@ -581,7 +581,7 @@ export const cases: CaseStudy[] = [
     featured: false,
     personality: "eccentric",
     accent: "frame",
-    coverImage: "/rockstar/Artboard 8-80.jpg",
+    coverImage: "/rockstar/logooR.png",
     galleryImages: [
       { src: "/rockstar/Artboard 8-80.jpg", caption: "ROCKSTAR_001 — final wordmark & lockup" },
       { src: "/rockstar/F520095C-1A44-4995-A94D-0A29A0684EE4.PNG", caption: "ROCKSTAR_002 — mark evolution & brand attributes" },

@@ -160,7 +160,7 @@ export function HeroCaseFile({
       animate="show"
     >
       <div
-        className="relative flex cursor-pointer select-none overflow-hidden rounded-[4px] border border-ink/[0.08] shadow-window transition-transform duration-200 hover:-rotate-[0.3deg] hover:scale-[1.005]"
+        className="relative flex cursor-pointer select-none flex-wrap overflow-hidden md:flex-nowrap rounded-[4px] border border-ink/[0.08] shadow-window transition-transform duration-200 hover:-rotate-[0.3deg] hover:scale-[1.005]"
         onClick={handleCardClick}
       >
         {/* ── Layer 1: Full manila folder background ── */}
@@ -173,7 +173,7 @@ export function HeroCaseFile({
 
         {/* ── Content rendered directly on the folder ── */}
         <motion.div
-          className="relative z-10 flex flex-1 flex-col p-5 sm:p-6"
+          className="relative z-10 flex min-w-0 flex-1 flex-col p-5 sm:p-6"
           variants={reduced ? undefined : fadeIn}
         >
           {/* Header */}
@@ -200,12 +200,12 @@ export function HeroCaseFile({
           </div>
         </motion.div>
 
-        {/* ── Interactive folder tabs ── */}
+        {/* ── Interactive folder tabs — below md (hero zoomed down) they sit as buttons across the top ── */}
         <motion.div
           role="tablist"
           aria-orientation="vertical"
           aria-label="Case file systems"
-          className="relative z-20 flex shrink-0 flex-col self-stretch py-4 sm:py-5"
+          className="relative z-20 order-first grid basis-full grid-cols-2 gap-2 px-3 pt-3 md:order-none md:flex md:basis-auto md:shrink-0 md:flex-col md:gap-0 md:self-stretch md:px-0 md:py-5"
           variants={reduced ? undefined : slideRight}
         >
           {folderTabs.map((folderTab) => {
@@ -228,7 +228,10 @@ export function HeroCaseFile({
                 }
                 onClick={(e) => handleTabClick(folderTab, e)}
                 className={cn(
-                  "mono-label cursor-pointer select-none px-1.5 py-2 text-[0.45rem] font-bold [writing-mode:vertical-rl] transition-all duration-200 sm:px-2 sm:py-2.5 sm:text-[0.55rem]",
+                  "mono-label cursor-pointer select-none px-2 font-bold leading-tight transition-all duration-200 md:py-2.5 md:text-[0.55rem] md:leading-normal md:[writing-mode:vertical-rl]",
+                  folderTab.id === "open"
+                    ? "col-span-2 whitespace-nowrap py-6 text-[1.75rem] md:whitespace-normal"
+                    : "py-3 text-[1.1rem]",
                   isActive
                     ? "shadow-window scale-105"
                     : "opacity-85 hover:scale-105 hover:opacity-100"

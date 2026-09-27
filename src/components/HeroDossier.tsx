@@ -129,7 +129,8 @@ export function HeroDossier() {
       <GridBackdrop />
       <div className="relative mx-auto max-w-[90rem] px-4 pb-20 pt-14 sm:px-6 lg:px-10 lg:pb-28 lg:pt-24">
         {/* ── headline + composite center/right composition ── */}
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,0.30fr)_minmax(0,0.70fr)] lg:items-start lg:gap-6">
+        {/* below md: lay out the 768px composition (720px content) and zoom it down to fit — same row, scaled */}
+        <div className="grid grid-cols-[minmax(0,0.30fr)_minmax(0,0.70fr)] items-start gap-6 max-md:w-[720px] max-md:[zoom:tan(atan2(calc(100vw_-_2rem),720px))] sm:max-md:[zoom:tan(atan2(calc(100vw_-_3rem),720px))]">
           {/* ── LEFT: editorial headline ── */}
           <div className="min-w-0 pr-4">
             <Reveal>
@@ -144,7 +145,7 @@ export function HeroDossier() {
               </p>
             </Reveal>
             <Reveal delay={80}>
-              <h1 className="font-display font-semibold uppercase leading-[0.98] tracking-tight text-ink text-5xl sm:text-6xl xl:text-7xl">
+              <h1 className="font-display font-semibold uppercase leading-[0.98] tracking-tight text-ink text-[2.6rem] lg:text-6xl xl:text-7xl">
                 <span className="block">
                   WE OBSERVE.
                   <HeroUnderline color="var(--color-moss)" />
@@ -226,14 +227,14 @@ export function HeroDossier() {
             </Reveal>
 
             {/* case file — full natural width, overlapping photo right edge */}
-            <Reveal delay={200} className="relative z-20 mt-8 lg:absolute lg:right-0 lg:top-0 lg:mt-0 lg:w-[48%]">
+            <Reveal delay={200} className="absolute right-0 top-0 z-20 w-[48%]">
               <div ref={cardRef}>
                 <HeroCaseFile active={active} onSelect={handleSelect} />
               </div>
             </Reveal>
 
             {/* sticky note — overlapping photo bottom-right into case file */}
-            <Reveal delay={200} className="pointer-events-none absolute bottom-[20%] left-[48%] z-30 hidden w-44 -rotate-2 animate-float lg:block">
+            <Reveal delay={200} className="pointer-events-none absolute -bottom-[12%] left-[48%] z-30 md:bottom-[20%] w-44 -rotate-2 animate-float">
               <StickyNote tone="frame" rotation={0}>
                 <p className="hand text-xl leading-snug text-ink">
                   What people see is only the beginning.
