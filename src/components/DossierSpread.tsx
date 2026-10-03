@@ -11,15 +11,16 @@ import type { TabId } from "@/components/HeroCaseFile";
 
 const slugByTab: Record<TabId, string> = {
   frame: "frame",
-  direct: "direct",
-  signal: "signal",
+  // home page: Signal and Direct sections show each other's content
+  direct: "signal",
+  signal: "direct",
   full: "full-frame",
 };
 
 const noteLine: Record<TabId, string> = {
   frame: "the frame is a decision. make it deliberate.",
-  direct: "directed on paper. rehearsed on set.",
-  signal: "keep the story moving.",
+  direct: "keep the story moving.",
+  signal: "directed on paper. rehearsed on set.",
   full: "one file. one voice. one standard.",
 };
 

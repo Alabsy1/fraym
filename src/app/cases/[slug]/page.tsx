@@ -95,6 +95,15 @@ export default async function CasePage({ params }: Props) {
                   ))}
                 </div>
               </Reveal>
+              {item.pdf && (
+                <Reveal delay={220}>
+                  <div className="mt-7">
+                    <CtaLink href={item.pdf} external variant="outline" tone="ink">
+                      Download Case Study PDF
+                    </CtaLink>
+                  </div>
+                </Reveal>
+              )}
             </div>
 
             <Reveal delay={160} className="relative">

@@ -61,7 +61,7 @@ export function CtaLink({
 
   if (external) {
     return (
-      <a href={href} target="_blank" rel="noreferrer" className={base} onClick={onClick}>
+      <a href={href} target="_blank" rel="noopener noreferrer" className={base} onClick={onClick}>
         {children}
         {arrow}
       </a>

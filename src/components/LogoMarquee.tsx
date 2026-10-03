@@ -1,5 +1,16 @@
-import { clientLogos } from "@/lib/data";
+import { cases, clientLogos } from "@/lib/data";
 import { Marquee } from "./ui/Marquee";
+
+// only clients without a case file; prefix match so "Gomam" catches "Gomam Hostel"
+const hasCase = (name: string) =>
+  cases.some((c) => c.client.toLowerCase().startsWith(name.toLowerCase()));
+const partners = clientLogos.filter((name) => !hasCase(name));
+// repeat the short list back up to the full roster length so the strip
+// keeps its width (no gap on wide screens) and its scroll speed
+const strip = Array.from(
+  { length: Math.ceil(clientLogos.length / Math.max(partners.length, 1)) },
+  () => partners
+).flat();
 
 const styles = [
   { font: "font-display", weight: "font-bold", tracking: "tracking-tight" },
@@ -15,11 +26,11 @@ export function LogoMarquee() {
         Clients whose perception we have framed
       </p>
       <Marquee slow>
-        {clientLogos.map((name, i) => {
+        {strip.map((name, i) => {
           const s = styles[i % styles.length];
           return (
             <span
-              key={name}
+              key={`${name}-${i}`}
               className={`mx-8 whitespace-nowrap text-2xl text-ink/70 sm:text-3xl ${s.font} ${s.weight} ${s.tracking}`}
             >
               {name}

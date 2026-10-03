@@ -13,7 +13,11 @@ import {
   CircleHighlight,
   InkUnderline,
 } from "@/components/ui/FramedHighlight";
-import { services, cases } from "@/lib/data";
+import { services, cases, serviceBySlug } from "@/lib/data";
+
+// home page: Signal and Direct slots show each other's content
+const swapSlug: Record<string, string> = { direct: "signal", signal: "direct" };
+const homeServices = services.map((s) => serviceBySlug(swapSlug[s.slug] ?? s.slug) ?? s);
 
 export default function HomePage() {
   const featured = cases.filter((c) => c.featured).slice(0, 3);
@@ -100,7 +104,7 @@ export default function HomePage() {
           </div>
 
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {services.map((service, i) => (
+            {homeServices.map((service, i) => (
               <Reveal key={service.slug} delay={i * 70}>
                 <ServiceCard service={service} className="h-full" inspect />
               </Reveal>

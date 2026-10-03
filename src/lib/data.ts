@@ -36,6 +36,7 @@ export interface CaseStudy {
   personality: "eccentric" | "incline" | "casualist";
   accent: AccentColor;
   coverImage?: string;
+  pdf?: string;
   galleryImages?: { src: string; caption: string }[];
   videos?: {
     src: string;
@@ -178,6 +179,7 @@ export const serviceBySlug = (slug: string): Service | undefined =>
 export const cases: CaseStudy[] = [
   {
     slug: "buono-tours",
+    pdf: "/buono/buono-tours-brand-report.pdf",
     client: "Buono Tours",
     industry: "Tourism & DMCs",
     year: "2026",
@@ -217,6 +219,7 @@ export const cases: CaseStudy[] = [
   },
   {
     slug: "sea-soul",
+    pdf: "/sea-soul/sea-soul-creative-direction.pdf",
     client: "Sea Soul",
     industry: "Travel & Tourism",
     year: "2025 – 2026",
@@ -278,6 +281,7 @@ export const cases: CaseStudy[] = [
   },
   {
     slug: "ruff",
+    pdf: "/ruff/ruff-brand-guidelines.pdf",
     client: "RUFF",
     industry: "Streetwear",
     year: "2026",
@@ -572,6 +576,7 @@ export const cases: CaseStudy[] = [
   },
   {
     slug: "rockstar",
+    pdf: "/rockstar/rockstar-company-profile.pdf",
     client: "ROCKSTAR",
     industry: "Real Estate Marketing",
     year: "2024",

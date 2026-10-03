@@ -127,25 +127,26 @@ export function HeroDossier() {
   return (
     <section className="relative overflow-hidden">
       <GridBackdrop />
-      <div className="relative mx-auto max-w-[90rem] px-4 pb-20 pt-14 sm:px-6 lg:px-10 lg:pb-28 lg:pt-24">
+      <div className="relative mx-auto max-w-[90rem] px-3 pb-20 pt-14 max-md:pb-10 max-md:pt-8 sm:px-6 lg:px-10 lg:pb-28 lg:pt-24">
         {/* ── headline + composite center/right composition ── */}
-        {/* below md: lay out the 768px composition (720px content) and zoom it down to fit — same row, scaled */}
-        <div className="grid grid-cols-[minmax(0,0.30fr)_minmax(0,0.70fr)] items-start gap-6 max-md:w-[720px] max-md:[zoom:tan(atan2(calc(100vw_-_2rem),720px))] sm:max-md:[zoom:tan(atan2(calc(100vw_-_3rem),720px))]">
+        {/* below md: same row — left copy at real mobile sizes; --hw = content width, right column = 56% of it */}
+        <div className="grid grid-cols-[minmax(0,0.30fr)_minmax(0,0.70fr)] items-start gap-6 max-md:gap-2 max-md:[--hw:calc(100vw_-_1.5rem)] sm:max-md:[--hw:calc(100vw_-_3rem)] max-md:grid-cols-[minmax(0,1fr)_calc((var(--hw)_-_0.5rem)*0.56)]">
           {/* ── LEFT: editorial headline ── */}
-          <div className="min-w-0 pr-4">
+          <div className="min-w-0 pr-4 max-md:pr-0">
             <Reveal>
-              <p className="mono-label mb-6 flex items-center gap-3 text-ink-soft">
+              <p className="mono-label mb-6 flex items-center gap-3 text-ink-soft max-md:mb-2">
                 <span className="inline-block h-px w-10 bg-ink/30" />
                 CASE OPENED
               </p>
             </Reveal>
             <Reveal delay={40}>
-              <p className="font-mono text-sm font-bold text-signal mb-6">
+              <p className="font-mono text-sm font-bold text-signal mb-6 max-md:mb-3">
                 FR-001
               </p>
             </Reveal>
             <Reveal delay={80}>
-              <h1 className="font-display font-semibold uppercase leading-[0.98] tracking-tight text-ink text-[2.6rem] lg:text-6xl xl:text-7xl">
+              {/* below md: sized so "WE OBSERVE." (~6.9em) fits the 44% left column */}
+              <h1 className="font-display font-semibold uppercase leading-[0.98] tracking-tight text-ink text-[2.6rem] max-md:text-[length:clamp(1rem,5.7vw,1.65rem)] max-md:leading-[1.1] lg:text-6xl xl:text-7xl">
                 <span className="block">
                   WE OBSERVE.
                   <HeroUnderline color="var(--color-moss)" />
@@ -181,7 +182,7 @@ export function HeroDossier() {
               </h1>
             </Reveal>
             <Reveal delay={160}>
-              <p className="mt-8 max-w-xl text-base leading-relaxed text-ink-soft md:text-lg">
+              <p className="mt-8 max-w-xl text-base leading-relaxed text-ink-soft max-md:mt-3 max-md:text-[13px] max-md:leading-snug md:text-lg">
                 Every brand has more to it than what first meets the eye.
                 We investigate what is there, uncover what is missing, and
                 shape it into something people can see, feel and{" "}
@@ -189,15 +190,17 @@ export function HeroDossier() {
               </p>
             </Reveal>
             <Reveal delay={200}>
-              <div className="mt-8 flex flex-wrap gap-4">
-                <CtaLink href="/contact">Open a Case</CtaLink>
-                <CtaLink href="/cases" variant="outline" tone="ink">
+              <div className="mt-8 flex flex-wrap gap-4 max-md:mt-4 max-md:gap-2">
+                <CtaLink href="/contact" className="max-md:px-3 max-md:py-2 max-md:text-[0.6rem]">
+                  Open a Case
+                </CtaLink>
+                <CtaLink href="/cases" variant="outline" tone="ink" className="max-md:px-3 max-md:py-2 max-md:text-[0.6rem]">
                   See Our Work
                 </CtaLink>
               </div>
             </Reveal>
             <Reveal delay={240}>
-              <div className="mt-12 flex items-center gap-3 text-ink-faint">
+              <div className="mt-12 flex items-center gap-3 text-ink-faint max-md:mt-5">
                 <svg
                   aria-hidden
                   className="size-5"
@@ -220,14 +223,15 @@ export function HeroDossier() {
           </div>
 
           {/* ── CENTER + RIGHT: composite composition ── */}
-          <div className="relative min-w-0">
+          {/* below md: lay the group out at 400px and zoom it to fit the right column (crisp, re-laid-out) */}
+          <div className="relative min-w-0 max-md:w-[400px] max-md:[zoom:tan(atan2(calc((var(--hw)_-_0.5rem)*0.56),400px))]">
             {/* central framed visual — sets the height of the composite */}
             <Reveal delay={160} className="relative z-10 w-[55%]">
               <HeroEvidenceBoard />
             </Reveal>
 
-            {/* case file — full natural width, overlapping photo right edge */}
-            <Reveal delay={200} className="absolute right-0 top-0 z-20 w-[48%]">
+            {/* case file — full natural width, overlapping photo right edge (tucked further in below md) */}
+            <Reveal delay={200} className="absolute right-0 top-0 z-20 w-[48%] max-md:w-[59%]">
               <div ref={cardRef}>
                 <HeroCaseFile active={active} onSelect={handleSelect} />
               </div>
