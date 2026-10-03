@@ -149,13 +149,6 @@ export function ScrollDrivenHero({
               </span>
             </div>
           </div>
-
-          {/* ── APPROVED CUT stamp ── */}
-          <div className="absolute -bottom-6 right-2 z-20 sm:right-6">
-            <span className="inline-block animate-sheet-pop -rotate-6 border-[3px] border-signal bg-paper/95 px-3 py-1.5 font-mono text-sm font-bold uppercase tracking-[0.22em] text-signal shadow-window sm:text-base">
-              APPROVED CUT
-            </span>
-          </div>
         </div>
       </div>
     </section>
