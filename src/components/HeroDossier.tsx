@@ -129,24 +129,24 @@ export function HeroDossier() {
       <GridBackdrop />
       <div className="relative mx-auto max-w-[90rem] px-3 pb-20 pt-14 max-md:pb-10 max-md:pt-8 sm:px-6 lg:px-10 lg:pb-28 lg:pt-24">
         {/* ── headline + composite center/right composition ── */}
-        {/* below md: stacked single column (clean mobile reading order); md+: two-column composite */}
-        <div className="grid grid-cols-[minmax(0,0.30fr)_minmax(0,0.70fr)] items-start gap-6 max-md:grid-cols-1 max-md:gap-10">
+        {/* below md: keep the same row side-by-side and zoom the 720px composition down to fit the viewport */}
+        <div className="grid grid-cols-[minmax(0,0.30fr)_minmax(0,0.70fr)] items-start gap-6 max-md:w-[720px] max-md:[--hw:calc(100vw_-_1.5rem)] sm:max-md:[--hw:calc(100vw_-_3rem)] max-md:[zoom:tan(atan2(var(--hw),720px))]">
           {/* ── LEFT: editorial headline ── */}
-          <div className="min-w-0 pr-4 max-md:pr-0">
+          <div className="min-w-0 pr-4">
             <Reveal>
-              <p className="mono-label mb-6 flex items-center gap-3 text-ink-soft max-md:mb-2">
+              <p className="mono-label mb-6 flex items-center gap-3 text-ink-soft">
                 <span className="inline-block h-px w-10 bg-ink/30" />
                 CASE OPENED
               </p>
             </Reveal>
             <Reveal delay={40}>
-              <p className="font-mono text-sm font-bold text-signal mb-6 max-md:mb-3">
+              <p className="font-mono text-sm font-bold text-signal mb-6">
                 FR-001
               </p>
             </Reveal>
             <Reveal delay={80}>
-              {/* below md: compact, tighter stack on full-width column; md+ keeps desktop scale */}
-              <h1 className="font-display font-semibold uppercase leading-[0.98] tracking-tight text-ink text-[2.6rem] max-md:text-[length:clamp(1.5rem,6vw,2.1rem)] max-md:leading-[1.08] lg:text-6xl xl:text-7xl">
+              {/* scaled proportionally by the grid zoom on mobile; desktop size on md+ */}
+              <h1 className="font-display font-semibold uppercase leading-[0.98] tracking-tight text-ink text-[2.6rem] lg:text-6xl xl:text-7xl">
                 <span className="block">
                   WE OBSERVE.
                   <HeroUnderline color="var(--color-moss)" />
@@ -182,7 +182,7 @@ export function HeroDossier() {
               </h1>
             </Reveal>
             <Reveal delay={160}>
-              <p className="mt-8 max-w-xl text-base leading-relaxed text-ink-soft max-md:mt-3 max-md:text-[13px] max-md:leading-snug md:text-lg">
+              <p className="mt-8 max-w-xl text-base leading-relaxed text-ink-soft md:text-lg">
                 Every brand has more to it than what first meets the eye.
                 We investigate what is there, uncover what is missing, and
                 shape it into something people can see, feel and{" "}
@@ -190,17 +190,15 @@ export function HeroDossier() {
               </p>
             </Reveal>
             <Reveal delay={200}>
-              <div className="mt-8 flex flex-wrap gap-4 max-md:mt-4 max-md:gap-2">
-                <CtaLink href="/contact" className="max-md:px-3 max-md:py-2 max-md:text-[0.6rem]">
-                  Open a Case
-                </CtaLink>
-                <CtaLink href="/cases" variant="outline" tone="ink" className="max-md:px-3 max-md:py-2 max-md:text-[0.6rem]">
+              <div className="mt-8 flex flex-wrap gap-4">
+                <CtaLink href="/contact">Open a Case</CtaLink>
+                <CtaLink href="/cases" variant="outline" tone="ink">
                   See Our Work
                 </CtaLink>
               </div>
             </Reveal>
             <Reveal delay={240}>
-              <div className="mt-12 flex items-center gap-3 text-ink-faint max-md:mt-5">
+              <div className="mt-12 flex items-center gap-3 text-ink-faint">
                 <svg
                   aria-hidden
                   className="size-5"
@@ -224,13 +222,13 @@ export function HeroDossier() {
 
           {/* ── CENTER + RIGHT: composite composition ── */}
           <div className="relative min-w-0">
-            {/* central framed visual — prominent full-width on mobile, 55% of the column on md+ */}
-            <Reveal delay={160} className="relative z-10 w-[55%] max-md:w-full">
+            {/* central framed visual — sets the height of the composite */}
+            <Reveal delay={160} className="relative z-10 w-[55%]">
               <HeroEvidenceBoard />
             </Reveal>
 
-            {/* case file — overlaps photo right edge on md+; stacked full-width below photo on mobile */}
-            <Reveal delay={200} className="relative z-20 mt-6 md:absolute md:right-0 md:top-0 md:mt-0 md:w-[48%]">
+            {/* case file — overlapping photo right edge (side-by-side on all screens) */}
+            <Reveal delay={200} className="absolute right-0 top-0 z-20 w-[48%]">
               <div ref={cardRef}>
                 <HeroCaseFile active={active} onSelect={handleSelect} />
               </div>
