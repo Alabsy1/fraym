@@ -129,8 +129,8 @@ export function HeroDossier() {
       <GridBackdrop />
       <div className="relative mx-auto max-w-[90rem] px-3 pb-20 pt-14 max-md:pb-10 max-md:pt-8 sm:px-6 lg:px-10 lg:pb-28 lg:pt-24">
         {/* ── headline + composite center/right composition ── */}
-        {/* below md: same row — left copy at real mobile sizes; --hw = content width, right column = 56% of it */}
-        <div className="grid grid-cols-[minmax(0,0.30fr)_minmax(0,0.70fr)] items-start gap-6 max-md:gap-2 max-md:[--hw:calc(100vw_-_1.5rem)] sm:max-md:[--hw:calc(100vw_-_3rem)] max-md:grid-cols-[minmax(0,1fr)_calc((var(--hw)_-_0.5rem)*0.56)]">
+        {/* below md: stacked single column (clean mobile reading order); md+: two-column composite */}
+        <div className="grid grid-cols-[minmax(0,0.30fr)_minmax(0,0.70fr)] items-start gap-6 max-md:grid-cols-1 max-md:gap-10">
           {/* ── LEFT: editorial headline ── */}
           <div className="min-w-0 pr-4 max-md:pr-0">
             <Reveal>
@@ -145,8 +145,8 @@ export function HeroDossier() {
               </p>
             </Reveal>
             <Reveal delay={80}>
-              {/* below md: sized so "WE OBSERVE." (~6.9em) fits the 44% left column */}
-              <h1 className="font-display font-semibold uppercase leading-[0.98] tracking-tight text-ink text-[2.6rem] max-md:text-[length:clamp(1rem,5.7vw,1.65rem)] max-md:leading-[1.1] lg:text-6xl xl:text-7xl">
+              {/* below md: compact, tighter stack on full-width column; md+ keeps desktop scale */}
+              <h1 className="font-display font-semibold uppercase leading-[0.98] tracking-tight text-ink text-[2.6rem] max-md:text-[length:clamp(1.5rem,6vw,2.1rem)] max-md:leading-[1.08] lg:text-6xl xl:text-7xl">
                 <span className="block">
                   WE OBSERVE.
                   <HeroUnderline color="var(--color-moss)" />
@@ -223,22 +223,21 @@ export function HeroDossier() {
           </div>
 
           {/* ── CENTER + RIGHT: composite composition ── */}
-          {/* below md: lay the group out at 400px and zoom it to fit the right column (crisp, re-laid-out) */}
-          <div className="relative min-w-0 max-md:w-[400px] max-md:[zoom:tan(atan2(calc((var(--hw)_-_0.5rem)*0.56),400px))]">
-            {/* central framed visual — sets the height of the composite */}
-            <Reveal delay={160} className="relative z-10 w-[55%]">
+          <div className="relative min-w-0">
+            {/* central framed visual — prominent full-width on mobile, 55% of the column on md+ */}
+            <Reveal delay={160} className="relative z-10 w-[55%] max-md:w-full">
               <HeroEvidenceBoard />
             </Reveal>
 
-            {/* case file — full natural width, overlapping photo right edge (tucked further in below md) */}
-            <Reveal delay={200} className="absolute right-0 top-0 z-20 w-[48%] max-md:w-[59%]">
+            {/* case file — overlaps photo right edge on md+; stacked full-width below photo on mobile */}
+            <Reveal delay={200} className="relative z-20 mt-6 md:absolute md:right-0 md:top-0 md:mt-0 md:w-[48%]">
               <div ref={cardRef}>
                 <HeroCaseFile active={active} onSelect={handleSelect} />
               </div>
             </Reveal>
 
-            {/* sticky note — overlapping photo bottom-right into case file */}
-            <Reveal delay={200} className="pointer-events-none absolute -bottom-[12%] left-[48%] z-30 md:bottom-[20%] w-44 -rotate-2 animate-float">
+            {/* sticky note — desktop only annotation, hidden on mobile */}
+            <Reveal delay={200} className="pointer-events-none absolute bottom-[20%] left-[48%] z-30 hidden w-44 -rotate-2 animate-float md:block">
               <StickyNote tone="frame" rotation={0}>
                 <p className="hand text-xl leading-snug text-ink">
                   What people see is only the beginning.

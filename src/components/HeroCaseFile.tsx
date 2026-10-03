@@ -173,19 +173,21 @@ export function HeroCaseFile({
 
         {/* ── Content rendered directly on the folder ── */}
         <motion.div
-          className="relative z-10 flex min-w-0 flex-1 flex-col p-5 sm:p-6"
+          className="relative z-10 flex min-w-0 flex-1 flex-col p-5 sm:p-6 max-md:p-4"
           variants={reduced ? undefined : fadeIn}
         >
           {/* Header */}
-          <div className="border-b-2 border-ink/60 pb-3">
-            <p className="mono-label text-ink-faint">CASE FILE</p>
-            <p className="font-mono text-xl font-bold tracking-tight text-ink sm:text-2xl">
+          <div className="border-b-2 border-ink/60 pb-3 max-md:pb-2">
+            <p className="mono-label text-ink-faint max-md:text-[0.6rem]">
+              CASE FILE
+            </p>
+            <p className="font-mono text-xl font-bold tracking-tight text-ink sm:text-2xl max-md:text-lg">
               {tab.ref}
             </p>
           </div>
 
           {/* Metadata fields */}
-          <div className="mt-5 flex-1 space-y-4">
+          <div className="mt-5 flex-1 space-y-4 max-md:mt-3 max-md:space-y-2.5">
             <Field label="CLIENT" value={tab.client} />
             <Field label="FIELD" value={tab.field} />
             <Field label="LOCATION" value={tab.location} />
@@ -193,19 +195,19 @@ export function HeroCaseFile({
             <Field label="CASE TYPE" value={tab.caseType} />
           </div>
 
-          {/* Bottom: Globe + CONFIDENTIAL */}
-          <div className="relative mt-auto flex items-end justify-between">
-            <Globe className="pointer-events-none w-20 sm:w-24" />
+          {/* Bottom: Globe + CONFIDENTIAL (globe hidden on mobile to keep the card tight) */}
+          <div className="relative mt-auto flex items-end justify-between max-md:justify-end">
+            <Globe className="pointer-events-none hidden w-20 sm:w-24 md:block" />
             <ConfidentialStampInline />
           </div>
         </motion.div>
 
-        {/* ── Interactive folder tabs — below md (hero zoomed down) they sit as buttons across the top ── */}
+        {/* ── Interactive folder tabs — compact 2-col chip grid on mobile; vertical rail on md+ ── */}
         <motion.div
           role="tablist"
           aria-orientation="vertical"
           aria-label="Case file systems"
-          className="relative z-20 order-first grid basis-full grid-cols-2 gap-2 px-3 pt-3 md:order-none md:flex md:basis-auto md:shrink-0 md:flex-col md:gap-0 md:self-stretch md:px-0 md:py-5"
+          className="relative z-20 order-first grid basis-full grid-cols-2 gap-1.5 px-2.5 pt-2.5 pb-1 md:order-none md:flex md:basis-auto md:shrink-0 md:flex-col md:gap-0 md:self-stretch md:px-0 md:py-5"
           variants={reduced ? undefined : slideRight}
         >
           {folderTabs.map((folderTab) => {
@@ -228,10 +230,10 @@ export function HeroCaseFile({
                 }
                 onClick={(e) => handleTabClick(folderTab, e)}
                 className={cn(
-                  "mono-label cursor-pointer select-none px-2 font-bold leading-tight transition-all duration-200 md:py-2.5 md:text-[0.55rem] md:leading-normal md:[writing-mode:vertical-rl]",
+                  "mono-label cursor-pointer select-none px-1.5 py-2.5 font-bold leading-none tracking-wide transition-all duration-200 md:px-2 md:py-2.5 md:leading-normal md:tracking-normal md:text-[0.55rem] md:[writing-mode:vertical-rl]",
                   folderTab.id === "open"
-                    ? "col-span-2 whitespace-nowrap py-6 text-[1.75rem] md:whitespace-normal"
-                    : "py-3 text-[1.1rem]",
+                    ? "col-span-2 whitespace-nowrap text-[0.72rem] md:whitespace-normal"
+                    : "text-[0.68rem]",
                   isActive
                     ? "shadow-window scale-105"
                     : "opacity-85 hover:scale-105 hover:opacity-100"
@@ -264,15 +266,15 @@ function Field({
 }) {
   return (
     <div>
-      <dt className="mono-label text-[0.6rem] font-bold text-ink-faint mb-0.5 uppercase tracking-wider">
+      <dt className="mono-label text-[0.6rem] font-bold text-ink-faint mb-0.5 uppercase tracking-wider max-md:text-[0.55rem]">
         {label}:
       </dt>
       {highlight ? (
-        <dd className="mono-label inline-block bg-frame/40 px-2 py-0.5 font-bold text-ink text-[0.7rem] tracking-wider uppercase">
+        <dd className="mono-label inline-block bg-frame/40 px-2 py-0.5 font-bold text-ink text-[0.7rem] tracking-wider uppercase max-md:px-1.5 max-md:text-[0.65rem]">
           {value}
         </dd>
       ) : (
-        <dd className="mono-label text-[0.7rem] font-semibold text-ink tracking-wide">
+        <dd className="mono-label text-[0.7rem] font-semibold text-ink tracking-wide max-md:text-[0.65rem]">
           {value}
         </dd>
       )}
@@ -285,7 +287,7 @@ function ConfidentialStampInline() {
   return (
     <span
       aria-hidden
-      className="inline-block -rotate-3 border-[1.5px] border-signal px-2 py-1 font-mono text-[0.55rem] font-bold uppercase tracking-[0.2em] text-signal opacity-80 sm:px-2.5 sm:py-1 sm:text-[0.65rem]"
+      className="inline-block -rotate-3 border-[1.5px] border-signal px-2 py-1 font-mono text-[0.55rem] font-bold uppercase tracking-[0.2em] text-signal opacity-80 max-md:px-1.5 max-md:text-[0.5rem] sm:px-2.5 sm:py-1 sm:text-[0.65rem]"
     >
       CONFIDENTIAL
     </span>
